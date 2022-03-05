@@ -5,6 +5,7 @@ import { grey } from "@mui/material/colors";
 const useStyles = makeStyles((theme: any) => ({
   searchContainer: {
     position: "relative",
+    marginRight: theme.spacing(2),
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {

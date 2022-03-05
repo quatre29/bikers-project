@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import HomeRounded from "@mui/icons-material/HomeRounded";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronRight } from "@mui/icons-material";
 import MenuDrawerOptions from "../MenuDrawerOptions";
 import MenuDesktopOptions from "../MenuDesktopOptions";
@@ -23,13 +23,14 @@ import SearchItem from "../SearchItem";
 const NavBar: React.FC = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
-    <AppBar position='static'>
-      <Container maxWidth='xl'>
+    <AppBar position='static' color='primary' elevation={3}>
+      <Container maxWidth='lg'>
         <Toolbar disableGutters>
           <Button
-            color='secondary'
+            color={location.pathname === "/" ? "warning" : "secondary"}
             startIcon={<HomeRounded />}
             onClick={() => navigate("/")}
           >
@@ -37,7 +38,7 @@ const NavBar: React.FC = () => {
           </Button>
           <Hidden smDown>
             <Button
-              color='secondary'
+              color={location.pathname === "/forum" ? "warning" : "secondary"}
               startIcon={<ForumIcon />}
               onClick={() => navigate("/forum")}
             >
@@ -46,7 +47,7 @@ const NavBar: React.FC = () => {
           </Hidden>
           <Box sx={{ flexGrow: 1 }} />
           <SearchItem />
-          <Box sx={{ flexGrow: 1 }} />
+          {/* <Box sx={{ flexGrow: 1 }} /> */}
           <Hidden smUp>
             <IconButton size='large' onClick={() => setOpenDrawer(true)}>
               <MenuIcon />
