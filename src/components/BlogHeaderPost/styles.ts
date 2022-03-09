@@ -19,6 +19,13 @@ const useStyles = makeStyles((theme: any) => ({
       `linear-gradient(0deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),center url(${props.image})`,
     textAlign: "center",
   },
+  titleLink: {
+    textDecoration: "none",
+    "&:hover": {
+      color: "whitesmoke",
+      textDecoration: "underline",
+    },
+  },
 }));
 
 export default useStyles;

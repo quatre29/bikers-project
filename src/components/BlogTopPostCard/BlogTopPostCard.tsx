@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import useStyles from "./styles";
 import UserAvatar from "../UserAvatar";
+import { Link } from "react-router-dom";
 
 interface BlogTopPost {
   image: string;
@@ -40,16 +41,18 @@ const BlogTopPostCard: React.FC<BlogTopPost> = ({ image }) => {
       <CardHeader
         avatar={<UserAvatar />}
         title={
-          <Typography
-            // color='whitesmoke'
-            variant='h6'
-            sx={(theme) => ({
-              // typography: { xs: "h4", sm: "h3", lg: "h4" },
-              marginBottom: theme.spacing(2),
-            })}
-          >
-            This is a title For this blog post
-          </Typography>
+          <Link to='/blog-post/2344' className={classes.titleLink}>
+            <Typography
+              // color='whitesmoke'
+              variant='h6'
+              sx={(theme) => ({
+                // typography: { xs: "h4", sm: "h3", lg: "h4" },
+                marginBottom: theme.spacing(2),
+              })}
+            >
+              This is a title For this blog post
+            </Typography>
+          </Link>
         }
         subheader='a month ago'
       />

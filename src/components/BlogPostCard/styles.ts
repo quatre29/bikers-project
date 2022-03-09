@@ -20,6 +20,13 @@ const useStyles = makeStyles((theme: any) => ({
   user: {},
   tags: { marginTop: theme.spacing(2) },
   coms: { marginTop: theme.spacing(2) },
+  titleLink: {
+    color: theme.palette.text.primary,
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
 }));
 
 export default useStyles;

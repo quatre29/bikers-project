@@ -18,6 +18,13 @@ const useStyles = makeStyles((theme: any) => ({
     // textAlign: "center",
     // padding: theme.spacing(2),
   },
+  titleLink: {
+    color: theme.palette.text.primary,
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
 }));
 
 export default useStyles;

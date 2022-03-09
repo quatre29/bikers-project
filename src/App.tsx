@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import BlogPost from "./pages/BlogPost";
 import ForumHomePage from "./pages/ForumHomePage";
 import HomePage from "./pages/HomePage";
 import UserProfile from "./pages/UserProfile";
@@ -21,6 +22,9 @@ const App: React.FC = () => {
       </Routes>
       <Routes>
         <Route path='/my-profile' element={<UserProfile />} />
+      </Routes>
+      <Routes>
+        <Route path='/blog-post/:id' element={<BlogPost />} />
       </Routes>
     </div>
   );

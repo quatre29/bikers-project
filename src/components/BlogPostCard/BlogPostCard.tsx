@@ -11,6 +11,7 @@ import {
 import useStyles from "./styles";
 import UserAvatar from "../UserAvatar";
 import { ChatBubble } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 interface BlogPostCardInterface {
   image: string;
@@ -32,9 +33,11 @@ const BlogPostCard: React.FC<BlogPostCardInterface> = ({ image }) => {
             a month ago
           </Typography>
 
-          <Typography className={classes.title} variant='h4'>
-            This is a title for the post
-          </Typography>
+          <Link to='/blog-post/2344' className={classes.titleLink}>
+            <Typography className={classes.title} variant='h4'>
+              This is a title for the post
+            </Typography>
+          </Link>
           <Box className={classes.tags}>#tag1 tag2</Box>
           <Box className={classes.coms}>
             <Badge color='secondary' badgeContent={3}>
