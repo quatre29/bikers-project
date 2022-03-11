@@ -10,6 +10,8 @@ import {
   Hidden,
   SwipeableDrawer,
   Button,
+  useScrollTrigger,
+  Slide,
 } from "@mui/material";
 import HomeRounded from "@mui/icons-material/HomeRounded";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -19,60 +21,96 @@ import MenuDrawerOptions from "../MenuDrawerOptions";
 import MenuDesktopOptions from "../MenuDesktopOptions";
 import ForumIcon from "@mui/icons-material/Forum";
 import SearchItem from "../SearchItem";
+import useStyles from "./styles";
 
-const NavBar: React.FC = () => {
+interface Props {
+  window?: () => Window;
+  children: React.ReactElement;
+}
+
+function HideOnScroll(props: Props) {
+  const { children, window } = props;
+
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+  });
+
+  return (
+    <Slide appear={false} direction='down' in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
+const NavBar = (props: any) => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const classes = useStyles(location);
 
   return (
-    <AppBar position='static' color='primary' elevation={3}>
-      <Container maxWidth='lg'>
-        <Toolbar disableGutters>
-          <Button
-            color={location.pathname === "/" ? "warning" : "secondary"}
-            startIcon={<HomeRounded />}
-            onClick={() => navigate("/")}
-          >
-            Home
-          </Button>
-          <Hidden smDown>
-            <Button
-              color={location.pathname === "/forum" ? "warning" : "secondary"}
-              startIcon={<ForumIcon />}
-              onClick={() => navigate("/forum")}
-            >
-              Forum
-            </Button>
-          </Hidden>
-          <Box sx={{ flexGrow: 1 }} />
-          <SearchItem />
-          {/* <Box sx={{ flexGrow: 1 }} /> */}
-          <Hidden smUp>
-            <IconButton size='large' onClick={() => setOpenDrawer(true)}>
-              <MenuIcon />
-            </IconButton>
-          </Hidden>
-          <Hidden smDown>
-            <MenuDesktopOptions />
-          </Hidden>
-        </Toolbar>
-      </Container>
-      <SwipeableDrawer
-        open={openDrawer}
-        onOpen={() => setOpenDrawer(true)}
-        onClose={() => setOpenDrawer(false)}
-        anchor='right'
+    <HideOnScroll {...props}>
+      <AppBar
+        sx={{
+          bgcolor: (theme) => theme.palette.background.paper,
+        }}
+        elevation={0}
       >
-        <Box>
-          <IconButton size='large' onClick={() => setOpenDrawer(false)}>
-            <ChevronRight />
-          </IconButton>
-        </Box>
+        <Container maxWidth='lg'>
+          <Toolbar disableGutters>
+            <Box className={classes.itemLink}>
+              <Button
+                // color={location.pathname === "/" ? "warning" : "secondary"}
+                startIcon={<HomeRounded />}
+                onClick={() => navigate("/")}
+                className={classes.textHomeLink}
+              >
+                Home
+              </Button>
+            </Box>
+
+            <Hidden smDown>
+              <Box className={classes.itemLink}>
+                <Button
+                  // color={location.pathname === "/forum" ? "warning" : "secondary"}
+                  startIcon={<ForumIcon />}
+                  onClick={() => navigate("/forum")}
+                  className={classes.textForumLink}
+                >
+                  Forum
+                </Button>
+              </Box>
+            </Hidden>
+            <Box sx={{ flexGrow: 1 }} />
+            <SearchItem />
+            {/* <Box sx={{ flexGrow: 1 }} /> */}
+            <Hidden smUp>
+              <IconButton size='large' onClick={() => setOpenDrawer(true)}>
+                <MenuIcon />
+              </IconButton>
+            </Hidden>
+            <Hidden smDown>
+              <MenuDesktopOptions />
+            </Hidden>
+          </Toolbar>
+        </Container>
+        <SwipeableDrawer
+          open={openDrawer}
+          onOpen={() => setOpenDrawer(true)}
+          onClose={() => setOpenDrawer(false)}
+          anchor='right'
+        >
+          <Box>
+            <IconButton size='large' onClick={() => setOpenDrawer(false)}>
+              <ChevronRight />
+            </IconButton>
+          </Box>
+          <Divider />
+          <MenuDrawerOptions onClickOption={setOpenDrawer} />
+        </SwipeableDrawer>
         <Divider />
-        <MenuDrawerOptions onClickOption={setOpenDrawer} />
-      </SwipeableDrawer>
-    </AppBar>
+      </AppBar>
+    </HideOnScroll>
   );
 };
 

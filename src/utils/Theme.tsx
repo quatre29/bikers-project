@@ -1,5 +1,11 @@
 import React, { createContext, useState, useMemo, useContext } from "react";
-import { createTheme, ThemeProvider, PaletteMode } from "@mui/material";
+import {
+  createTheme,
+  ThemeProvider,
+  PaletteMode,
+  PaletteOptions,
+  TypeBackground,
+} from "@mui/material";
 import {
   grey,
   deepOrange,
@@ -39,15 +45,22 @@ export const ColorModeContextProvider: React.FC = ({ children }) => {
       createTheme({
         palette: {
           mode: mode as PaletteMode,
+          background: {
+            default: mode === "light" ? grey[100] : "#121212",
+          },
           primary: {
-            main: mode === "light" ? blueGrey[500] : grey[300],
-            light: mode === "light" ? blueGrey[200] : grey[100],
-            dark: mode === "light" ? blueGrey[600] : grey[600],
+            main: mode === "light" ? indigo[500] : grey[300],
+            light: mode === "light" ? indigo[200] : grey[100],
+            dark: mode === "light" ? indigo[600] : grey[600],
           },
           secondary: {
             main: indigo[400],
             light: indigo[200],
             dark: indigo[600],
+          },
+          text: {
+            primary: blueGrey[800],
+            secondary: blueGrey[500],
           },
         },
       }),

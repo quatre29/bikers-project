@@ -6,12 +6,14 @@ import useStyles from "./styles";
 const ForumTopicItem: React.FC = () => {
   const classes = useStyles();
   return (
-    <Grid container>
+    <Grid container className={classes.container}>
       <Grid item>
         <UserAvatar />
       </Grid>
       <Grid item className={classes.textContainer}>
-        <Typography variant='body1'>Moderator</Typography>
+        <Typography className={classes.usernameText} variant='body1'>
+          Moderator
+        </Typography>
         <Typography variant='body2' color='text.secondary'>
           a few seconds ago
         </Typography>

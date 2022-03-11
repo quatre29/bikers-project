@@ -38,7 +38,7 @@ const BlogPostCard: React.FC<BlogPostCardInterface> = ({ image }) => {
               This is a title for the post
             </Typography>
           </Link>
-          <Box className={classes.tags}>#tag1 tag2</Box>
+          <Box className={classes.tags}>#tag1 #tag2</Box>
           <Box className={classes.coms}>
             <Badge color='secondary' badgeContent={3}>
               <ChatBubble />

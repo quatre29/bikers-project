@@ -1,3 +1,4 @@
+import { blueGrey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme: any) => ({
@@ -17,14 +18,17 @@ const useStyles = makeStyles((theme: any) => ({
     fontWeight: "bold",
     marginTop: theme.spacing(2),
   },
-  user: {},
-  tags: { marginTop: theme.spacing(2) },
+  user: {
+    fontWeight: "bold",
+    color: blueGrey[700],
+  },
+  tags: { marginTop: theme.spacing(2), color: theme.palette.text.secondary },
   coms: { marginTop: theme.spacing(2) },
   titleLink: {
     color: theme.palette.text.primary,
     textDecoration: "none",
     "&:hover": {
-      textDecoration: "underline",
+      color: theme.palette.primary.main,
     },
   },
 }));

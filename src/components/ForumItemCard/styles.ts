@@ -1,3 +1,4 @@
+import { indigo } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme: any) => ({
@@ -18,6 +19,18 @@ const useStyles = makeStyles((theme: any) => ({
   mainForumText: {
     marginLeft: theme.spacing(2),
   },
+  forumTitle: {
+    fontWeight: "bold",
+    "&:hover": {
+      color: theme.palette.primary.main,
+      cursor: "pointer",
+    },
+  },
+
+  titleLink: {
+    textDecoration: "none",
+    color: "inherit",
+  },
   numericItem: {
     display: "flex",
     alignItems: "center",
@@ -36,6 +49,11 @@ const useStyles = makeStyles((theme: any) => ({
   },
   subForumText: {
     marginLeft: theme.spacing(1),
+    "&:hover": {
+      color: theme.palette.primary.main,
+      cursor: "pointer",
+      fontWeight: "bold",
+    },
   },
   divider: {
     marginTop: theme.spacing(2),

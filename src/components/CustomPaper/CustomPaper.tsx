@@ -15,7 +15,7 @@ const CustomPaper: React.FC = ({ children }) => {
       //   sx={(theme) => ({
       //     backgroundColor: theme.palette.mode === "light" && deepPurple[100],
       //   })}
-      elevation={3}
+      variant='outlined'
     >
       {children}
     </Paper>

@@ -6,6 +6,20 @@ const useStyles = makeStyles((theme: any) => ({
     alignItems: "center",
     justifyContent: "center",
   },
+  forumText: {
+    fontWeight: "bold",
+  },
+  forumTextContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
+  forumTextIcon: {
+    marginRight: theme.spacing(0.5),
+  },
+  textLink: {
+    textDecoration: "none",
+    color: "inherit",
+  },
 }));
 
 export default useStyles;

@@ -1,11 +1,15 @@
 import React from "react";
 import useStyles from "./styles";
 import { Grid, Typography, Divider } from "@mui/material";
+import { Link } from "react-router-dom";
 import LocalPostOfficeIcon from "@mui/icons-material/LocalPostOffice";
 import SubForumItem from "./SubForumItem";
 import ForumTopicItem from "../ForumTopicItem";
+interface Props {
+  subForumContainer?: boolean;
+}
 
-const ForumItemCard: React.FC = () => {
+const ForumItemCard: React.FC<Props> = ({ subForumContainer }) => {
   const classes = useStyles();
   return (
     <Grid container>
@@ -18,10 +22,15 @@ const ForumItemCard: React.FC = () => {
                 <LocalPostOfficeIcon fontSize='large' />
               </Grid>
               <Grid item className={classes.mainForumText}>
-                <Typography variant='h6'>
-                  This is title for this forum
-                </Typography>
-                <Typography variant='body1'>
+                <Link
+                  to='/forum/category/announcements'
+                  className={classes.titleLink}
+                >
+                  <Typography variant='h6' className={classes.forumTitle}>
+                    This is title for this forum
+                  </Typography>
+                </Link>
+                <Typography variant='body2' color='text.secondary'>
                   This is a short description of the forum
                 </Typography>
               </Grid>
@@ -38,18 +47,20 @@ const ForumItemCard: React.FC = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Grid container>
-          <Grid item xs={1}></Grid>
+      {!subForumContainer && (
+        <Grid item xs={12}>
+          <Grid container>
+            <Grid item xs={1}></Grid>
 
-          <Grid item>
-            <SubForumItem />
-            <SubForumItem />
-            <SubForumItem />
-            <SubForumItem />
+            <Grid item>
+              <SubForumItem />
+              <SubForumItem />
+              <SubForumItem />
+              <SubForumItem />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      )}
     </Grid>
   );
 };

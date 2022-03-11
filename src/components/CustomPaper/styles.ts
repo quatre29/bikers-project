@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme: any) => ({
     [theme.breakpoints.down("sm")]: {
       padding: theme.spacing(1),
     },
-    backgroundColor: theme.palette.mode === "light" ? deepPurple[100] : "none",
+    // backgroundColor: theme.palette.mode === "light" ? deepPurple[100] : "none",
     // marginTop: theme.spacing(4),
   },
 }));

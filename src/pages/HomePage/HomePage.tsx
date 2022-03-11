@@ -10,20 +10,20 @@ const HomePage: React.FC = () => {
   const classes = useStyles({ color: "red" });
   return (
     <Container maxWidth='lg' className={classes.container}>
-      <CustomPaper>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <BlogHeader />
-            <Divider sx={(theme) => ({ marginTop: theme.spacing(4) })} />
-          </Grid>
-          <Grid item md={8}>
-            <BlogFeed />
-          </Grid>
-          <Grid item md={4}>
-            <BlogTopPosts />
-          </Grid>
+      {/* <CustomPaper> */}
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <BlogHeader />
+          <Divider sx={(theme) => ({ marginTop: theme.spacing(2) })} />
         </Grid>
-      </CustomPaper>
+        <Grid item md={8}>
+          <BlogFeed />
+        </Grid>
+        <Grid item md={4}>
+          <BlogTopPosts />
+        </Grid>
+      </Grid>
+      {/* </CustomPaper> */}
     </Container>
   );
 };

@@ -1,8 +1,12 @@
 import React from "react";
 import { Container, Grid, Typography, Box } from "@mui/material";
-import ForumCategoryCard from "../../components/ForumCategoryCard";
 
-const ForumHomePage: React.FC = () => {
+import useStyles from "./styles";
+import ForumTopicsContainer from "../../components/ForumTopicsContainer";
+
+const ForumPage: React.FC = () => {
+  const classes = useStyles();
+
   return (
     <>
       <Box
@@ -20,25 +24,10 @@ const ForumHomePage: React.FC = () => {
         }}
       ></Box>
       <Container maxWidth='lg'>
-        <Grid container spacing={4}>
-          <Grid item xs={12}>
-            <Typography
-              variant='h5'
-              sx={(theme) => ({ marginTop: theme.spacing(4) })}
-            >
-              Forums
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <ForumCategoryCard />
-          </Grid>
-          <Grid item xs={12}>
-            <ForumCategoryCard />
-          </Grid>
-        </Grid>
+        <ForumTopicsContainer />
       </Container>
     </>
   );
 };
 
-export default ForumHomePage;
+export default ForumPage;

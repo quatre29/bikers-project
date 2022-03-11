@@ -49,13 +49,13 @@ const BlogPost: React.FC = () => {
               <Grid item xs={4}>
                 <Grid container spacing={2}>
                   <Grid item>
-                    <BlogTopPostCard image={images[0]} />
+                    <BlogTopPostCard onPost image={images[0]} />
                   </Grid>
                   <Grid item>
-                    <BlogTopPostCard image={images[1]} />
+                    <BlogTopPostCard onPost image={images[1]} />
                   </Grid>
                   <Grid item>
-                    <BlogTopPostCard image={images[2]} />
+                    <BlogTopPostCard onPost image={images[2]} />
                   </Grid>
                 </Grid>
               </Grid>
