@@ -14,11 +14,10 @@ import { Link } from "react-router-dom";
 
 interface BlogTopPost {
   image: string;
-  onPost?: boolean;
 }
 
-const BlogTopPostCard: React.FC<BlogTopPost> = ({ image, onPost }) => {
-  const classes = useStyles({ image, onPost });
+const BlogTopPostCard: React.FC<BlogTopPost> = ({ image }) => {
+  const classes = useStyles({ image });
 
   return (
     // <Box className={classes.container}>

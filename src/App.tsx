@@ -9,6 +9,7 @@ import UserSettings from "./pages/UserSettings";
 import { Box } from "@mui/material";
 import ForumCategoryPage from "./pages/ForumCategoryPage";
 import ForumPage from "./pages/ForumPage";
+import ForumTopicPage from "./pages/ForumTopicPage";
 
 const App: React.FC = () => {
   return (
@@ -28,6 +29,10 @@ const App: React.FC = () => {
         <Route
           path='/forum/:category_slug/:forum_slug'
           element={<ForumPage />}
+        />
+        <Route
+          path='/forum/:category_slug/:forum_slug/:topic_id'
+          element={<ForumTopicPage />}
         />
 
         <Route path='/settings' element={<UserSettings />} />

@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme: any) => ({
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: theme.spacing(2),
-    border: "1px solid black",
     padding: theme.spacing(2),
     borderRadius: theme.shape.borderRadius,
   },

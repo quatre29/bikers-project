@@ -33,7 +33,7 @@ const ForumTopicsContainer: React.FC = () => {
                   </Grid>
                   <Grid item xs={1} className={classes.textContainer}>
                     <Typography variant='body2' className={classes.text}>
-                      Views
+                      Rate
                     </Typography>
                   </Grid>
                   <Grid item xs={2} className={classes.textContainer}>

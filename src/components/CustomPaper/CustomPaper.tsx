@@ -3,8 +3,12 @@ import { Paper } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import useStyles from "./styles";
 
-const CustomPaper: React.FC = ({ children }) => {
-  const classes = useStyles();
+interface Props {
+  noPadding?: boolean;
+}
+
+const CustomPaper: React.FC<Props> = ({ children, noPadding }) => {
+  const classes = useStyles({ noPadding });
 
   return (
     <Paper

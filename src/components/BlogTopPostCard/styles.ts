@@ -2,8 +2,7 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme: any) => ({
   container: {
-    backgroundColor: (props: any) =>
-      props.onPost && theme.palette.background.default,
+    // backgroundColor: (props: any) =>
     // height: theme.spacing(40),
     // width: "100%",
     // backgroundSize: "auto",

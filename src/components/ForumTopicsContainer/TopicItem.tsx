@@ -4,6 +4,8 @@ import { Divider, Grid, Box, Typography } from "@mui/material";
 import ForumTopicItem from "../ForumTopicItem";
 import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
 import { Link } from "react-router-dom";
+import StarRateIcon from "@mui/icons-material/StarRate";
+import StarIcon from "@mui/icons-material/Star";
 
 interface Props {
   pinned?: boolean;
@@ -30,7 +32,7 @@ const TopicItem: React.FC<Props> = ({ pinned }) => {
           32
         </Grid>
         <Grid item xs={1} className={classes.textContainer}>
-          245
+          4.5 / 5
         </Grid>
         <Grid item xs={2} className={classes.textContainer}>
           Moderator

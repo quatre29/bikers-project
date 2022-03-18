@@ -5,6 +5,7 @@ import CustomPaper from "../../components/CustomPaper";
 import BlogTopPostCard from "../../components/BlogTopPostCard";
 import UserAvatar from "../../components/UserAvatar";
 import TextForPost from "./TextForPost";
+import BlogPostInfo from "../../components/BlogPostInfo";
 
 const images = [
   "https://images.unsplash.com/photo-1646422462528-0a48ac201c3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
@@ -17,16 +18,19 @@ const BlogPost: React.FC = () => {
 
   return (
     <Container maxWidth='lg' className={classes.container}>
-      <CustomPaper>
-        <Grid container>
-          <Grid item xs={12}>
+      <Grid container>
+        {/* <Grid item xs={12}>
             <Typography variant='h4' className={classes.title}>
               This is a title for the post
             </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container spacing={2}>
-              <Grid item xs={8} className={classes.postContainer}>
+          </Grid> */}
+        <Grid item xs={12}>
+          <Grid container spacing={2}>
+            <Grid item xs={8} className={classes.postContainer}>
+              <CustomPaper>
+                <Typography variant='h4' className={classes.title}>
+                  This is a title for the post
+                </Typography>
                 <img src={images[0]} className={classes.banner} />
                 <Box className={classes.postDetails}>
                   <Box className={classes.postDetailsCreator}>
@@ -45,24 +49,28 @@ const BlogPost: React.FC = () => {
                 <Box className={classes.postText}>
                   <TextForPost />
                 </Box>
-              </Grid>
-              <Grid item xs={4}>
-                <Grid container spacing={2}>
-                  <Grid item>
-                    <BlogTopPostCard onPost image={images[0]} />
-                  </Grid>
-                  <Grid item>
-                    <BlogTopPostCard onPost image={images[1]} />
-                  </Grid>
-                  <Grid item>
-                    <BlogTopPostCard onPost image={images[2]} />
-                  </Grid>
+              </CustomPaper>
+            </Grid>
+
+            <Grid item xs={4}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <BlogPostInfo />
+                </Grid>
+                <Grid item xs={12}>
+                  <BlogTopPostCard image={images[0]} />
+                </Grid>
+                <Grid item xs={12}>
+                  <BlogTopPostCard image={images[1]} />
+                </Grid>
+                <Grid item xs={12}>
+                  <BlogTopPostCard image={images[2]} />
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </CustomPaper>
+      </Grid>
     </Container>
   );
 };

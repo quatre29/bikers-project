@@ -35,9 +35,17 @@ interface AvatarProps {
   className?: { [prop: string]: string };
   userId?: string;
   online?: boolean;
+  size?: { width: number; height: number };
+  variant?: "square" | "circular" | "rounded";
 }
 
-const UserAvatar: React.FC<AvatarProps> = ({ className, userId, online }) => {
+const UserAvatar: React.FC<AvatarProps> = ({
+  className,
+  userId,
+  online,
+  size,
+  variant,
+}) => {
   return (
     <>
       {online ? (
@@ -47,15 +55,17 @@ const UserAvatar: React.FC<AvatarProps> = ({ className, userId, online }) => {
           variant='dot'
         >
           <Avatar
+            variant={variant}
+            sx={size}
             alt='user avatar'
-            sx={className}
             src='https://lwlies.com/wp-content/uploads/2017/04/avatar-2009.jpg'
           />
         </StyledBadge>
       ) : (
         <Avatar
           alt='user avatar'
-          sx={className}
+          variant={variant}
+          sx={size}
           src='https://lwlies.com/wp-content/uploads/2017/04/avatar-2009.jpg'
         />
       )}
