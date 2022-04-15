@@ -4,6 +4,7 @@ import { deepPurple } from "@mui/material/colors";
 import useStyles from "./styles";
 
 interface Props {
+  children: React.ReactNode;
   noPadding?: boolean;
 }
 
@@ -19,7 +20,7 @@ const CustomPaper: React.FC<Props> = ({ children, noPadding }) => {
       //   sx={(theme) => ({
       //     backgroundColor: theme.palette.mode === "light" && deepPurple[100],
       //   })}
-      variant='outlined'
+      variant="outlined"
     >
       {children}
     </Paper>

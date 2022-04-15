@@ -3,9 +3,12 @@ import { deepPurple } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme: any) => ({
   paperContainer: {
-    // padding: theme.spacing(4, 10, 4, 10),
-    padding: (props: { noPadding?: boolean }) =>
-      !props.noPadding && theme.spacing(4, 4, 4, 4),
+    // padding: (props: { noPadding?: boolean }) =>
+    //   !props.noPadding && theme.spacing(4, 4, 4, 4),
+    padding: theme.spacing(4, 4, 4, 4),
+
+    // ,
+    // padding: theme.spacing(4, 4, 4, 4),
     [theme.breakpoints.down("sm")]: {
       padding: theme.spacing(1),
     },

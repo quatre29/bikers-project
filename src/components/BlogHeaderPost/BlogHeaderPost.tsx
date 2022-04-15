@@ -11,10 +11,15 @@ interface BlogPost {
 const BlogHeaderPost: React.FC<BlogPost> = ({ secondary, image }) => {
   const classes = useStyles({ image });
   return (
-    <Box className={classes.container}>
-      <Link to='/blog-post/2344' className={classes.titleLink}>
+    <Box
+      sx={{
+        background: `linear-gradient(0deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),center url(${image})`,
+      }}
+      className={classes.container}
+    >
+      <Link to="/blog-post/2344" className={classes.titleLink}>
         <Typography
-          color='whitesmoke'
+          color="white"
           sx={{
             typography: { xs: "h4", sm: "h3", lg: secondary ? "h4" : "h2" },
           }}

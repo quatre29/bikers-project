@@ -9,13 +9,13 @@ const BlogPostInfo: React.FC = () => {
     <Box className={classes.container}>
       <CustomPaper>
         <Box className={classes.ratingContainer}>
-          <Typography variant='body1'>Rate this post</Typography>
+          <Typography variant="body1">Rate this post</Typography>
           <Stack spacing={1}>
             <Rating
-              name='half-rating'
-              size='large'
-              defaultValue={2.5}
-              precision={0.5}
+              name="half-rating"
+              size="large"
+              defaultValue={2}
+              precision={1}
             />
           </Stack>
         </Box>

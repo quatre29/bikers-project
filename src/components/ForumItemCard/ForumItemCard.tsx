@@ -19,18 +19,18 @@ const ForumItemCard: React.FC<Props> = ({ subForumContainer }) => {
           <Grid item xs={8} className={classes.mainForumContainer}>
             <Grid container>
               <Grid xs={1} item className={classes.iconContainer}>
-                <LocalPostOfficeIcon fontSize='large' />
+                <LocalPostOfficeIcon fontSize="large" />
               </Grid>
               <Grid item className={classes.mainForumText}>
                 <Link
-                  to='/forum/category/announcements'
+                  to="/forum/category/announcements"
                   className={classes.titleLink}
                 >
-                  <Typography variant='h6' className={classes.forumTitle}>
-                    This is title for this forum
+                  <Typography variant="h6" className={classes.forumTitle}>
+                    This is the title of this forum
                   </Typography>
                 </Link>
-                <Typography variant='body2' color='text.secondary'>
+                <Typography variant="body2" color="text.secondary">
                   This is a short description of the forum
                 </Typography>
               </Grid>

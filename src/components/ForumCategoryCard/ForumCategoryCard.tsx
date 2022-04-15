@@ -22,39 +22,39 @@ const ForumCategoryCard: React.FC<Props> = ({ subForumContainer }) => {
           <Grid container>
             <Grid item xs={8} className={classes.forumTextContainer}>
               <ForumRoundedIcon
-                fontSize='small'
+                fontSize="small"
                 className={classes.forumTextIcon}
               />
-              <Link to='/forum/category' className={classes.textLink}>
-                <Typography variant='body2' className={classes.forumText}>
+              <Link to="/forum/category" className={classes.textLink}>
+                <Typography variant="body2" className={classes.forumText}>
                   Main Forum
                 </Typography>
               </Link>
             </Grid>
             <Grid item xs={1} className={classes.forumItem}>
               <LightbulbRoundedIcon
-                fontSize='small'
+                fontSize="small"
                 className={classes.forumTextIcon}
               />
-              <Typography variant='body2' className={classes.forumText}>
+              <Typography variant="body2" className={classes.forumText}>
                 Topics
               </Typography>
             </Grid>
             <Grid item xs={1} className={classes.forumItem}>
               <CommentRoundedIcon
-                fontSize='small'
+                fontSize="small"
                 className={classes.forumTextIcon}
               />
-              <Typography variant='body2' className={classes.forumText}>
+              <Typography variant="body2" className={classes.forumText}>
                 Posts
               </Typography>
             </Grid>
             <Grid item xs={2} className={classes.forumItem}>
               <DynamicFeedRoundedIcon
-                fontSize='small'
+                fontSize="small"
                 className={classes.forumTextIcon}
               />
-              <Typography variant='body2' className={classes.forumText}>
+              <Typography variant="body2" className={classes.forumText}>
                 Last post
               </Typography>
             </Grid>

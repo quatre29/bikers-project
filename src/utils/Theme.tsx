@@ -1,24 +1,6 @@
 import React, { createContext, useState, useMemo, useContext } from "react";
-import {
-  createTheme,
-  ThemeProvider,
-  PaletteMode,
-  PaletteOptions,
-  TypeBackground,
-} from "@mui/material";
-import {
-  grey,
-  deepOrange,
-  yellow,
-  orange,
-  lime,
-  green,
-  lightGreen,
-  deepPurple,
-  blueGrey,
-  indigo,
-  cyan,
-} from "@mui/material/colors";
+import { createTheme, ThemeProvider, PaletteMode } from "@mui/material";
+import { grey, blueGrey, indigo } from "@mui/material/colors";
 
 type ColorMode = "dark" | "light";
 
@@ -27,7 +9,13 @@ export const ColorModeContext = createContext({
   mode: "light",
 });
 
-export const ColorModeContextProvider: React.FC = ({ children }) => {
+interface ContextChildrenProps {
+  children: React.ReactNode;
+}
+
+export const ColorModeContextProvider: React.FC<ContextChildrenProps> = ({
+  children,
+}) => {
   const [mode, setMode] = useState<ColorMode>("light");
 
   const colorMode = useMemo(

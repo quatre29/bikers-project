@@ -10,10 +10,13 @@ import { Box } from "@mui/material";
 import ForumCategoryPage from "./pages/ForumCategoryPage";
 import ForumPage from "./pages/ForumPage";
 import ForumTopicPage from "./pages/ForumTopicPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App: React.FC = () => {
   return (
-    <div className='App'>
+    <div className="App">
       <NavBar />
       <Box
         sx={(theme) => ({
@@ -23,21 +26,74 @@ const App: React.FC = () => {
       ></Box>
 
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/forum' element={<ForumHomePage />} />
-        <Route path='/forum/:category' element={<ForumCategoryPage />} />
         <Route
-          path='/forum/:category_slug/:forum_slug'
-          element={<ForumPage />}
+          path="/"
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
         />
         <Route
-          path='/forum/:category_slug/:forum_slug/:topic_id'
-          element={<ForumTopicPage />}
+          path="/forum"
+          element={
+            <PrivateRoute>
+              <ForumHomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/forum/:category"
+          element={
+            <PrivateRoute>
+              <ForumCategoryPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/forum/:category_slug/:forum_slug"
+          element={
+            <PrivateRoute>
+              <ForumPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/forum/:category_slug/:forum_slug/:topic_id"
+          element={
+            <PrivateRoute>
+              <ForumTopicPage />
+            </PrivateRoute>
+          }
         />
 
-        <Route path='/settings' element={<UserSettings />} />
-        <Route path='/my-profile' element={<UserProfile />} />
-        <Route path='/blog-post/:id' element={<BlogPost />} />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <UserSettings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/my-profile"
+          element={
+            <PrivateRoute>
+              <UserProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/blog-post/:id"
+          element={
+            <PrivateRoute>
+              <BlogPost />
+            </PrivateRoute>
+          }
+        />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

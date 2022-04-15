@@ -15,8 +15,8 @@ const useStyles = makeStyles((theme: any) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: (props: { image: string }) =>
-      `linear-gradient(0deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),center url(${props.image})`,
+    // background: (props: { image: string }) =>
+    //   `linear-gradient(0deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),center url(${props.image})`,
     textAlign: "center",
   },
   titleLink: {

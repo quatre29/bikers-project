@@ -17,7 +17,7 @@ const BlogPost: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <Container maxWidth='lg' className={classes.container}>
+    <Container maxWidth="lg" className={classes.container}>
       <Grid container>
         {/* <Grid item xs={12}>
             <Typography variant='h4' className={classes.title}>
@@ -28,7 +28,7 @@ const BlogPost: React.FC = () => {
           <Grid container spacing={2}>
             <Grid item xs={8} className={classes.postContainer}>
               <CustomPaper>
-                <Typography variant='h4' className={classes.title}>
+                <Typography variant="h4" className={classes.title}>
                   This is a title for the post
                 </Typography>
                 <img src={images[0]} className={classes.banner} />
@@ -37,12 +37,12 @@ const BlogPost: React.FC = () => {
                     <UserAvatar />
                     <Typography
                       sx={(theme) => ({ marginLeft: theme.spacing(2) })}
-                      variant='body1'
+                      variant="body1"
                     >
                       Moderator
                     </Typography>
                   </Box>
-                  <Typography variant='body2' color='text.secondary'>
+                  <Typography variant="body2" color="text.secondary">
                     a month ago
                   </Typography>
                 </Box>
