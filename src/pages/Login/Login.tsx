@@ -8,7 +8,7 @@ import {
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "../../store/auth/authSlice";
 import { useAuth } from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();

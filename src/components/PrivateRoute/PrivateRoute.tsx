@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { Outlet, useLocation } from "react-router-dom";
 
-const PrivateRoute: React.FC<any> = ({ children }) => {
-  const { user, result } = useAuth();
+const PrivateRoute: React.FC<any> = ({ allowedRoles }) => {
+  const { user, isLoading } = useAuth();
+  const location = useLocation();
 
-  if (!user && result.isLoading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  // if (!user) {
-  //   console.log(data, "data useAuth");
-  // }
-
-  return user ? children : <Navigate to="/login" />;
+  return user && allowedRoles?.includes(user.role) ? (
+    <Outlet />
+  ) : user ? (
+    <Navigate to="/unauthorized" state={{ from: location }} replace />
+  ) : (
+    <Navigate to="/login" state={{ from: location }} replace />
+  );
 };
 
 export default PrivateRoute;

@@ -9,27 +9,25 @@ import { User } from "../models/user.model";
 export const useAuth = () => {
   const dispatch = useDispatch();
   const user: User | null = useSelector(selectCurrentUser);
-  const [trigger, result] = useLazyGetMeQuery();
+  const [trigger] = useLazyGetMeQuery();
+  const [isLoading, setIsLoading] = useState(true);
 
-  console.log(result, "*******");
   useEffect(() => {
     if (!user) {
       trigger().then((res) => {
-        console.log(result, "===========");
         dispatch(setAuthUser(res.data?.data.user!));
-
-        // setUser(res.data?.data.user!);
+        setIsLoading(false);
       });
+    } else {
+      setIsLoading(false);
     }
   }, [dispatch, trigger, user]);
 
   return useMemo(
     () => ({
-      // user: data?.data.user,
-      // isLoading,
-      result,
+      isLoading,
       user,
     }),
-    [user, result]
+    [user, isLoading]
   );
 };

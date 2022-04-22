@@ -14,95 +14,41 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivateRoute from "./components/PrivateRoute";
 import { useAuth } from "./hooks/useAuth";
+import Layout from "./components/Layout";
+import NotFound from "./pages/NotFound";
+import UnauthorizedPage from "./pages/UnauthorizedPage";
 
 const App: React.FC = () => {
-  const { user, result } = useAuth();
-
-  // if (result.isLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
   return (
-    <div className="App">
-      {user && <NavBar />}
-      <Box
-        sx={(theme) => ({
-          height: theme.spacing(8),
-          width: "100%",
-        })}
-      ></Box>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route
+          element={
+            <PrivateRoute allowedRoles={["member", "admin", "moderator"]} />
+          }
+        >
+          <Route path="/" element={<HomePage />} />
+          <Route path="/forum" element={<ForumHomePage />} />
+          <Route path="/forum/:category" element={<ForumCategoryPage />} />
+          <Route
+            path="/forum/:category_slug/:forum_slug"
+            element={<ForumPage />}
+          />
+          <Route
+            path="/forum/:category_slug/:forum_slug/:topic_id"
+            element={<ForumTopicPage />}
+          />
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <HomePage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/forum"
-          element={
-            <PrivateRoute>
-              <ForumHomePage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/forum/:category"
-          element={
-            <PrivateRoute>
-              <ForumCategoryPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/forum/:category_slug/:forum_slug"
-          element={
-            <PrivateRoute>
-              <ForumPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/forum/:category_slug/:forum_slug/:topic_id"
-          element={
-            <PrivateRoute>
-              <ForumTopicPage />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/settings"
-          element={
-            <PrivateRoute>
-              <UserSettings />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/my-profile"
-          element={
-            <PrivateRoute>
-              <UserProfile />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/blog-post/:id"
-          element={
-            <PrivateRoute>
-              <BlogPost />
-            </PrivateRoute>
-          }
-        />
-
+          <Route path="/settings" element={<UserSettings />} />
+          <Route path="/my-profile" element={<UserProfile />} />
+          <Route path="/blog-post/:id" element={<BlogPost />} />
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-      </Routes>
-    </div>
+        <Route path="/unauthorized" element={<UnauthorizedPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 };
 
