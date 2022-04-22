@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-
-// interface PrivateRouteProps {
-//   children: React.ReactNode;
-// }
+import { useAuth } from "../../hooks/useAuth";
+import { Outlet, useLocation } from "react-router-dom";
 
 const PrivateRoute: React.FC<any> = ({ children }) => {
-  const user = null;
+  const { user, result } = useAuth();
+
+  if (!user && result.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  // if (!user) {
+  //   console.log(data, "data useAuth");
+  // }
 
   return user ? children : <Navigate to="/login" />;
 };

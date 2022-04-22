@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { UserLogin, UserRegister } from "../models/auth.model";
+import { UserResponse } from "../models/response.model";
 import { User } from "../models/user.model";
 
 export const authApi = createApi({
@@ -11,29 +12,46 @@ export const authApi = createApi({
     },
     credentials: "include",
   }),
+  tagTypes: ["Authentication"],
 
   endpoints: (builder) => ({
-    register: builder.mutation<User, UserRegister>({
+    register: builder.mutation<UserResponse, UserRegister>({
       query: (registerDetails) => ({
         url: "/api/users/",
         method: "POST",
         body: registerDetails,
       }),
+      invalidatesTags: ["Authentication"],
     }),
 
-    login: builder.mutation<User, UserLogin>({
+    login: builder.mutation<UserResponse, UserLogin>({
       query: (loginDetails) => ({
         url: "/api/users/login",
         method: "POST",
         body: loginDetails,
       }),
+      invalidatesTags: ["Authentication"],
     }),
 
-    getUserById: builder.query<User, string>({
-      query: (user_id) => `/api/users/${user_id}`,
+    getMe: builder.query<UserResponse, void>({
+      query: () => ({
+        url: `/api/users/me`,
+        method: "GET",
+      }),
+    }),
+
+    getUsers: builder.query<UserResponse[], void>({
+      query: () => ({
+        url: `/api/users`,
+        method: "GET",
+      }),
     }),
   }),
 });
 
-export const { useGetUserByIdQuery, useLoginMutation, useRegisterMutation } =
-  authApi;
+export const {
+  useGetUsersQuery,
+  useLazyGetMeQuery,
+  useLoginMutation,
+  useRegisterMutation,
+} = authApi;

@@ -1,16 +1,45 @@
-import React, { useState } from "react";
-import { useGetUserByIdQuery, useLoginMutation } from "../../services/authApi";
+import React, { useState, useEffect } from "react";
+import type { UserLogin } from "../../models/auth.model";
+import {
+  useLazyGetMeQuery,
+  useGetUsersQuery,
+  useLoginMutation,
+} from "../../services/authApi";
+import { useDispatch } from "react-redux";
+import { setAuthUser } from "../../store/auth/authSlice";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
-  const [loginDetails, setLoginDetails] = useState({
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const [loginDetails, setLoginDetails] = useState<UserLogin>({
     username: "quatre2",
     password: "qawsed",
   });
 
-  const [login] = useLoginMutation();
+  const [test, setTest] = useState(false);
 
-  const { data, error, isLoading, isFetching, isSuccess } =
-    useGetUserByIdQuery("5");
+  const [
+    login,
+    {
+      data: loginData,
+      isError: isErrorLogin,
+      error: loginError,
+      isLoading: isLoginLoading,
+    },
+  ] = useLoginMutation();
+
+  useEffect(() => {
+    console.log("USEEFEFECT 1------------------------1");
+    if (user) {
+      console.log("USEEFEFECT 2------------------------2");
+
+      navigate("/");
+    }
+  }, [user]);
 
   const handleChange = (
     event: React.ChangeEvent,
@@ -27,10 +56,14 @@ const Login: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    await login(loginDetails);
-    // setLoginDetails({ username: "", password: "" });
+    const loginRes = await login(loginDetails).unwrap();
+    if (loginRes.status === "success") {
+      dispatch(setAuthUser(loginRes.data.user));
+      setTest(!test);
+      // setLoginDetails({ username: "", password: "" });
+    }
   };
-
+  // console.log(isLoading, "loading is loading", user);
   return (
     <div>
       <>
@@ -48,12 +81,8 @@ const Login: React.FC = () => {
 
           <button type="submit">Login</button>
         </form>
-
-        {isLoading && <h2>Loading...</h2>}
-        {error && <h2>Something went wrong</h2>}
-        {error && console.log(error)}
-
-        {isSuccess && console.log(data, "====")}
+        {isErrorLogin && console.log(loginError, "(*&^%%%6sada")}
+        {isLoginLoading && <div>logging in...</div>}
       </>
     </div>
   );

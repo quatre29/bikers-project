@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import BlogPost from "./pages/BlogPost";
@@ -13,11 +13,18 @@ import ForumTopicPage from "./pages/ForumTopicPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivateRoute from "./components/PrivateRoute";
+import { useAuth } from "./hooks/useAuth";
 
 const App: React.FC = () => {
+  const { user, result } = useAuth();
+
+  // if (result.isLoading) {
+  //   return <div>Loading...</div>;
+  // }
+
   return (
     <div className="App">
-      <NavBar />
+      {user && <NavBar />}
       <Box
         sx={(theme) => ({
           height: theme.spacing(8),
