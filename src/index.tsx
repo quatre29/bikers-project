@@ -7,6 +7,8 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import { ColorModeContextProvider } from "./utils/Theme";
 import { Provider } from "react-redux";
 import { store } from "./store/index";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const rootContainer = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -19,6 +21,7 @@ rootContainer.render(
         <ColorModeContextProvider>
           <StyledEngineProvider injectFirst>
             <CssBaseline />
+            <ToastContainer position="bottom-right" pauseOnHover newestOnTop />
             <App />
           </StyledEngineProvider>
         </ColorModeContextProvider>

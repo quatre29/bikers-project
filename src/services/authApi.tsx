@@ -39,19 +39,8 @@ export const authApi = createApi({
         method: "GET",
       }),
     }),
-
-    getUsers: builder.query<UserResponse[], void>({
-      query: () => ({
-        url: `/api/users`,
-        method: "GET",
-      }),
-    }),
   }),
 });
 
-export const {
-  useGetUsersQuery,
-  useLazyGetMeQuery,
-  useLoginMutation,
-  useRegisterMutation,
-} = authApi;
+export const { useLazyGetMeQuery, useLoginMutation, useRegisterMutation } =
+  authApi;

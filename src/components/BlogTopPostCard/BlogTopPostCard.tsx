@@ -11,13 +11,17 @@ import {
 import useStyles from "./styles";
 import UserAvatar from "../UserAvatar";
 import { Link } from "react-router-dom";
+import { BlogPost } from "../../models/response.model";
+import moment from "../../utils/momentDate";
 
 interface BlogTopPost {
-  image: string;
+  data: BlogPost;
 }
 
-const BlogTopPostCard: React.FC<BlogTopPost> = ({ image }) => {
-  const classes = useStyles({ image });
+const BlogTopPostCard: React.FC<BlogTopPost> = ({ data }) => {
+  const classes = useStyles({});
+
+  const date = moment(data.created_at);
 
   return (
     // <Box className={classes.container}>
@@ -37,31 +41,29 @@ const BlogTopPostCard: React.FC<BlogTopPost> = ({ image }) => {
     //     essentially unchanged. It was popularised in
     //   </Typography>
     // </Box>
-    <Card className={classes.container} variant='outlined'>
+    <Card className={classes.container} variant="outlined">
       <CardHeader
-        avatar={<UserAvatar />}
+        avatar={<UserAvatar image={data.author_avatar} />}
         title={
-          <Link to='/blog-post/2344' className={classes.titleLink}>
+          <Link to={`/blog-post/${data.post_id}`} className={classes.titleLink}>
             <Typography
               // color='whitesmoke'
-              variant='h6'
+              variant="h6"
               sx={(theme) => ({
                 // typography: { xs: "h4", sm: "h3", lg: "h4" },
                 marginBottom: theme.spacing(2),
               })}
             >
-              This is a title For this blog post
+              {data.title}
             </Typography>
           </Link>
         }
-        subheader='a month ago'
+        subheader={date}
       />
-      <CardMedia component='img' height='194' image={image} />
+      <CardMedia component="img" height="194" image={data.post_banner} />
       <CardContent>
-        <Typography variant='body2' color='text.secondary'>
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+        <Typography variant="body2" color="text.secondary">
+          {data.description}
         </Typography>
       </CardContent>
     </Card>

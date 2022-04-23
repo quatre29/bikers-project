@@ -10,7 +10,7 @@ const BlogTopPosts: React.FC = () => {
   ];
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <BlogTopPostCard image={images[0]} />
       </Grid>
       <Grid item xs={12}>
@@ -18,7 +18,7 @@ const BlogTopPosts: React.FC = () => {
       </Grid>
       <Grid item xs={12}>
         <BlogTopPostCard image={images[2]} />
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

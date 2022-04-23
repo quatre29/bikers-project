@@ -12,45 +12,49 @@ import useStyles from "./styles";
 import UserAvatar from "../UserAvatar";
 import { ChatBubble } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { BlogPost } from "../../models/response.model";
+import moment from "../../utils/momentDate";
 
 interface BlogPostCardInterface {
-  image: string;
+  data: BlogPost;
 }
 
-const BlogPostCard: React.FC<BlogPostCardInterface> = ({ image }) => {
+const BlogPostCard: React.FC<BlogPostCardInterface> = ({ data }) => {
   const classes = useStyles();
   return (
-    <Card variant='outlined' className={classes.container}>
+    <Card variant="outlined" className={classes.container}>
       <Grid container>
         <Grid item xs={1}>
-          <UserAvatar />
+          <UserAvatar image={data.author_avatar} />
         </Grid>
         <Grid xs={11} item className={classes.body}>
-          <Typography variant='body1' className={classes.user}>
-            Moderator
+          <Typography variant="body1" className={classes.user}>
+            {data.author}
           </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            a month ago
+          <Typography variant="body2" color="text.secondary">
+            {moment(data.created_at)}
           </Typography>
 
-          <Link to='/blog-post/2344' className={classes.titleLink}>
-            <Typography className={classes.title} variant='h4'>
-              This is a title for the post
+          <Link to={`/blog-post/${data.post_id}`} className={classes.titleLink}>
+            <Typography className={classes.title} variant="h4">
+              {data.title}
             </Typography>
           </Link>
-          <Box className={classes.tags}>#tag1 #tag2</Box>
+          <Box className={classes.tags}>
+            {data.tags.map((tag) => `#${tag}  `)}
+          </Box>
           <Box className={classes.coms}>
-            <Badge color='secondary' badgeContent={3}>
+            <Badge color="secondary" badgeContent={data.comments_count}>
               <ChatBubble />
             </Badge>
           </Box>
         </Grid>
       </Grid>
+
       <CardMedia
-        component='img'
+        component="img"
         sx={{ width: 151, borderRadius: "5px" }}
-        image={image}
-        alt='Live from space album cover'
+        image={data.post_banner}
       />
     </Card>
   );

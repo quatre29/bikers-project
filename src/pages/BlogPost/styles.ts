@@ -1,5 +1,5 @@
 import { makeStyles } from "@mui/styles";
-import { deepPurple } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme: any) => ({
   container: {
@@ -14,8 +14,7 @@ const useStyles = makeStyles((theme: any) => ({
     borderRadius: theme.shape.borderRadius,
     objectFit: "cover",
     // border: theme.palette.mode === "light" && `1px solid ${deepPurple[200]}`,
-    border:
-      theme.palette.mode === "light" ? `1px solid ${deepPurple[200]}` : "none",
+    border: theme.palette.mode === "light" ? `1px solid ${grey[400]}` : "none",
   },
   title: {
     fontWeight: "bold",
@@ -28,7 +27,7 @@ const useStyles = makeStyles((theme: any) => ({
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: theme.spacing(2),
-    padding: theme.spacing(2),
+    padding: theme.spacing(2, 2, 2, 0),
     borderRadius: theme.shape.borderRadius,
   },
   postDetailsCreator: {

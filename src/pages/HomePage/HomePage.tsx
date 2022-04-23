@@ -8,8 +8,9 @@ import CustomPaper from "../../components/CustomPaper";
 
 const HomePage: React.FC = () => {
   const classes = useStyles({ color: "red" });
+
   return (
-    <Container maxWidth='lg' className={classes.container}>
+    <Container maxWidth="lg" className={classes.container}>
       {/* <CustomPaper> */}
       <Grid container spacing={2}>
         <Grid item xs={12}>

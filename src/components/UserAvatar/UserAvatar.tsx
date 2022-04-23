@@ -37,6 +37,7 @@ interface AvatarProps {
   online?: boolean;
   size?: { width: number; height: number };
   variant?: "square" | "circular" | "rounded";
+  image?: string;
 }
 
 const UserAvatar: React.FC<AvatarProps> = ({
@@ -45,28 +46,38 @@ const UserAvatar: React.FC<AvatarProps> = ({
   online,
   size,
   variant,
+  image,
 }) => {
   return (
     <>
       {online ? (
         <StyledBadge
-          overlap='circular'
+          overlap="circular"
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-          variant='dot'
+          variant="dot"
         >
           <Avatar
             variant={variant}
             sx={size}
-            alt='user avatar'
-            src='https://lwlies.com/wp-content/uploads/2017/04/avatar-2009.jpg'
+            alt="user avatar"
+            // src="https://lwlies.com/wp-content/uploads/2017/04/avatar-2009.jpg"
+            src={
+              image
+                ? image
+                : "https://lwlies.com/wp-content/uploads/2017/04/avatar-2009.jpg"
+            }
           />
         </StyledBadge>
       ) : (
         <Avatar
-          alt='user avatar'
+          alt="user avatar"
           variant={variant}
           sx={size}
-          src='https://lwlies.com/wp-content/uploads/2017/04/avatar-2009.jpg'
+          src={
+            image
+              ? image
+              : "https://lwlies.com/wp-content/uploads/2017/04/avatar-2009.jpg"
+          }
         />
       )}
     </>
