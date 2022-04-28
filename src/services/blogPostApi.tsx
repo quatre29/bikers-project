@@ -23,8 +23,8 @@ export const blogPostApi = createApi({
       query: () => ({
         url: "/api/blog-posts",
         method: "GET",
-        providesTags: ["BlogPosts"],
       }),
+      providesTags: ["BlogPosts"],
     }),
 
     //TODO: pagination query
@@ -32,24 +32,24 @@ export const blogPostApi = createApi({
       query: () => ({
         url: "/api/blog-posts?pinned=false",
         method: "GET",
-        providesTags: ["BlogPosts"],
       }),
+      providesTags: ["BlogPosts"],
     }),
 
     getAllPinnedBlogPosts: builder.query<BlogPostsResponse, void>({
       query: () => ({
         url: "/api/blog-posts?pinned=true",
         method: "GET",
-        providesTags: ["BlogPosts"],
       }),
+      providesTags: ["BlogPosts"],
     }),
 
     getBlogPost: builder.query<BlogPostResponse, string | undefined>({
       query: (post_id) => ({
         url: `/api/blog-posts/${post_id}`,
         method: "GET",
-        providesTags: ["BlogPost"],
       }),
+      providesTags: ["BlogPost"],
     }),
 
     getMyBlogPostRating: builder.query<
@@ -59,8 +59,8 @@ export const blogPostApi = createApi({
       query: (post_id) => ({
         url: `/api/blog-posts/${post_id}/my-rating`,
         method: "GET",
-        providesTags: ["BlogPostRating"],
       }),
+      providesTags: ["BlogPostRating"],
     }),
 
     rateBlogPost: builder.mutation<
@@ -72,7 +72,7 @@ export const blogPostApi = createApi({
         method: "POST",
         body: { rating },
       }),
-      invalidatesTags: ["BlogPost"],
+      invalidatesTags: ["BlogPostRating"],
     }),
   }),
 });
