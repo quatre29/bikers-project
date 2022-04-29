@@ -2,6 +2,8 @@ import React from "react";
 import { Box, List, ListItem, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useStyles from "./styles";
+import { getParsedCommandLineOfConfigFile } from "typescript";
+import LogoutMenuItem from "../MenuDesktopOptions/LogoutMenuItem";
 
 interface DrawerProps {
   onClickOption: (bool: boolean) => void;
@@ -39,13 +41,7 @@ const MenuDrawerOptions: React.FC<DrawerProps> = ({ onClickOption }) => {
         >
           Forum
         </ListItem>
-
-        <ListItem
-          className={classes.linkItem}
-          onClick={() => console.log("sign out")}
-        >
-          Sign Out
-        </ListItem>
+        <LogoutMenuItem version="mobile" />
       </List>
     </Box>
   );

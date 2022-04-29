@@ -14,6 +14,8 @@ import UserAvatar from "../UserAvatar";
 import { useNavigate } from "react-router-dom";
 import Logout from "@mui/icons-material/Logout";
 import Settings from "@mui/icons-material/Settings";
+import { useLogoutMutation } from "../../services/authApi";
+import LogoutMenuItem from "./LogoutMenuItem";
 
 const MenuDesktopOptions: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -40,14 +42,14 @@ const MenuDesktopOptions: React.FC = () => {
 
   return (
     <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title='Open Menu'>
+      <Tooltip title="Open Menu">
         <IconButton onClick={handleOpenUserMenu}>
           <UserAvatar online />
         </IconButton>
       </Tooltip>
       <Menu
         sx={{ mt: "45px" }}
-        id='menu-appbar'
+        id="menu-appbar"
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: "top",
@@ -95,31 +97,12 @@ const MenuDesktopOptions: React.FC = () => {
         <Divider />
         <MenuItem onClick={handleCloseUserMenuGoSettings}>
           <ListItemIcon>
-            <Settings fontSize='small' />
+            <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={() => console.log("sign out")}>
-          <ListItemIcon>
-            <Logout fontSize='small' />
-          </ListItemIcon>
-          Sign Out
-        </MenuItem>
 
-        {/* <MenuItem
-          variant='contained'
-          //   className={classes.menuItem}
-          onClick={handleCloseUserMenuGoProfile}
-        >
-          My Profile
-        </MenuItem>
-        <MenuItem
-          //   className={classes.menuItem}
-          onClick={() => console.log("sign out")}
-          variant='contained'
-        >
-          Sign Out
-        </MenuItem> */}
+        <LogoutMenuItem version="desktop" />
       </Menu>
     </Box>
   );

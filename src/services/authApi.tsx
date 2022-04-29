@@ -33,6 +33,13 @@ export const authApi = createApi({
       invalidatesTags: ["Authentication"],
     }),
 
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: "/api/users/logout",
+        method: "POST",
+      }),
+    }),
+
     getMe: builder.query<UserResponse, void>({
       query: () => ({
         url: `/api/users/me`,
@@ -42,5 +49,9 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLazyGetMeQuery, useLoginMutation, useRegisterMutation } =
-  authApi;
+export const {
+  useLazyGetMeQuery,
+  useLoginMutation,
+  useRegisterMutation,
+  useLogoutMutation,
+} = authApi;

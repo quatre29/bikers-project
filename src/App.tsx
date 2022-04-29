@@ -21,12 +21,12 @@ import UnauthorizedPage from "./pages/UnauthorizedPage";
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route
-          element={
-            <PrivateRoute allowedRoles={["member", "admin", "moderator"]} />
-          }
-        >
+      <Route
+        element={
+          <PrivateRoute allowedRoles={["member", "admin", "moderator"]} />
+        }
+      >
+        <Route path="/" element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/forum" element={<ForumHomePage />} />
           <Route path="/forum/:category" element={<ForumCategoryPage />} />
@@ -43,11 +43,11 @@ const App: React.FC = () => {
           <Route path="/my-profile" element={<UserProfile />} />
           <Route path="/blog-post/:id" element={<BlogPost />} />
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/unauthorized" element={<UnauthorizedPage />} />
-        <Route path="*" element={<NotFound />} />
       </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/unauthorized" element={<UnauthorizedPage />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
