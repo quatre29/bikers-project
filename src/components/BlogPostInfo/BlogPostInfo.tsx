@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import CustomPaper from "../CustomPaper";
 import useStyles from "./styles";
-import { Box, Typography, Stack, Rating } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Stack,
+  Rating,
+  CircularProgress,
+} from "@mui/material";
 import { BlogPost, RateBlogPost } from "../../models/response.model";
 import {
   useGetMyBlogPostRatingQuery,
@@ -73,15 +79,19 @@ const BlogPostInfo: React.FC<Props> = ({ data }) => {
           <Typography variant="body1">
             {myRatingData?.data.rating ? "Your rating" : "Rate this post"}
           </Typography>
-          <Stack spacing={1}>
-            <Rating
-              name="half-rating"
-              size="large"
-              value={myRating}
-              onChange={(event, newValue) => rateThisBlogPost(newValue)}
-              precision={1}
-            />
-          </Stack>
+          {isLoading ? (
+            <CircularProgress size={30} />
+          ) : (
+            <Stack spacing={1}>
+              <Rating
+                name="half-rating"
+                size="large"
+                value={myRating}
+                onChange={(event, newValue) => rateThisBlogPost(newValue)}
+                precision={1}
+              />
+            </Stack>
+          )}
         </Box>
       </CustomPaper>
     </Box>

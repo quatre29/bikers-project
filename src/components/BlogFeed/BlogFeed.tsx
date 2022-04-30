@@ -31,41 +31,6 @@ const BlogFeed: React.FC<Props> = ({ data, isError, isSuccess }) => {
             )}
           </Grid>
         ))}
-      {/* <Grid item xs={12}>
-        {matches ? (
-          <BlogTopPostCard image={images[0]} />
-        ) : (
-          <BlogPostCard image={images[0]} />
-        )}
-      </Grid>
-      <Grid item xs={12}>
-        {matches ? (
-          <BlogTopPostCard image={images[1]} />
-        ) : (
-          <BlogPostCard image={images[1]} />
-        )}
-      </Grid>
-      <Grid item xs={12}>
-        {matches ? (
-          <BlogTopPostCard image={images[2]} />
-        ) : (
-          <BlogPostCard image={images[2]} />
-        )}
-      </Grid>
-      <Grid item xs={12}>
-        {matches ? (
-          <BlogTopPostCard image={images[1]} />
-        ) : (
-          <BlogPostCard image={images[1]} />
-        )}
-      </Grid>
-      <Grid item xs={12}>
-        {matches ? (
-          <BlogTopPostCard image={images[0]} />
-        ) : (
-          <BlogPostCard image={images[0]} />
-        )}
-      </Grid> */}
     </Grid>
   );
 };

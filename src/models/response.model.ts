@@ -21,7 +21,7 @@ export interface BlogPost {
   pinned: boolean;
   author: string;
   post_banner: string;
-  tags: string[];
+  tags: string[] | [];
   description: string;
   avg_rating: string | number;
   ratings_count: string | number;

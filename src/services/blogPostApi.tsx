@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { BlogPostReq } from "../models/req.models";
 import {
   BlogPostsResponse,
   BlogPostResponse,
@@ -74,6 +75,15 @@ export const blogPostApi = createApi({
       }),
       invalidatesTags: ["BlogPostRating"],
     }),
+
+    createBlogPost: builder.mutation<BlogPostResponse, BlogPostReq>({
+      query: (body) => ({
+        url: `/api/blog-posts`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["BlogPosts"],
+    }),
   }),
 });
 
@@ -84,4 +94,5 @@ export const {
   useGetBlogPostQuery,
   useGetMyBlogPostRatingQuery,
   useRateBlogPostMutation,
+  useCreateBlogPostMutation,
 } = blogPostApi;

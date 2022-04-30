@@ -15,17 +15,17 @@ const rootContainer = ReactDOM.createRoot(
 );
 
 rootContainer.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <ColorModeContextProvider>
-          <StyledEngineProvider injectFirst>
-            <CssBaseline />
-            <ToastContainer position="bottom-right" pauseOnHover newestOnTop />
-            <App />
-          </StyledEngineProvider>
-        </ColorModeContextProvider>
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <BrowserRouter>
+    <Provider store={store}>
+      <ColorModeContextProvider>
+        <StyledEngineProvider injectFirst>
+          <CssBaseline />
+          <ToastContainer position="bottom-left" pauseOnHover newestOnTop />
+          <App />
+        </StyledEngineProvider>
+      </ColorModeContextProvider>
+    </Provider>
+  </BrowserRouter>
+  // </React.StrictMode>
 );

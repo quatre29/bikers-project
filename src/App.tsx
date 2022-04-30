@@ -17,6 +17,7 @@ import { useAuth } from "./hooks/useAuth";
 import Layout from "./components/Layout";
 import NotFound from "./pages/NotFound";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
+import CreateBlogPost from "./pages/CreateBlogPost";
 
 const App: React.FC = () => {
   return (
@@ -29,6 +30,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/forum" element={<ForumHomePage />} />
+          <Route path="/new-blog" element={<CreateBlogPost />} />
           <Route path="/forum/:category" element={<ForumCategoryPage />} />
           <Route
             path="/forum/:category_slug/:forum_slug"
