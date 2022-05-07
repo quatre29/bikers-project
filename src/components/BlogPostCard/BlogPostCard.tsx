@@ -14,6 +14,7 @@ import { ChatBubble } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { BlogPost } from "../../models/response.model";
 import moment from "../../utils/momentDate";
+import TagItem from "../TagItem";
 
 interface BlogPostCardInterface {
   data: BlogPost;
@@ -41,7 +42,9 @@ const BlogPostCard: React.FC<BlogPostCardInterface> = ({ data }) => {
             </Typography>
           </Link>
           <Box className={classes.tags}>
-            {data.tags.map((tag) => `#${tag}  `)}
+            {data.tags.map((tag, i) => (
+              <TagItem key={`${tag}${i}`} tag={tag} />
+            ))}
           </Box>
           <Box className={classes.coms}>
             <Badge color="secondary" badgeContent={data.comments_count}>

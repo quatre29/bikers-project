@@ -5,6 +5,7 @@ import {
   BlogPostResponse,
   BlogPostRatingResponse,
   RateBlogPost,
+  BlogPostBookmarks,
 } from "../models/response.model";
 
 export const blogPostApi = createApi({
@@ -84,6 +85,31 @@ export const blogPostApi = createApi({
       }),
       invalidatesTags: ["BlogPosts"],
     }),
+
+    getBookmarksByPost: builder.query<
+      BlogPostBookmarks,
+      string | number | undefined
+    >({
+      query: (post_id) => ({
+        url: `/api/blog-posts/${post_id}/bookmarks`,
+        method: "GET",
+      }),
+    }),
+
+    pinBlogPost: builder.mutation<
+      BlogPostResponse,
+      {
+        post_id: string | number | undefined;
+        body: { pinned: boolean | undefined };
+      }
+    >({
+      query: (body) => ({
+        url: `/api/blog-posts/${body.post_id}/pin`,
+        method: "PATCH",
+        body: body.body,
+      }),
+      invalidatesTags: ["BlogPosts", "BlogPost"],
+    }),
   }),
 });
 
@@ -95,4 +121,6 @@ export const {
   useGetMyBlogPostRatingQuery,
   useRateBlogPostMutation,
   useCreateBlogPostMutation,
+  useGetBookmarksByPostQuery,
+  usePinBlogPostMutation,
 } = blogPostApi;

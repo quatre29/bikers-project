@@ -28,6 +28,10 @@ export interface BlogPost {
   created_at: Date;
   author_avatar: string;
   comments_count: string | number;
+  author_name: string;
+  author_role: string;
+  author_location: string | null;
+  author_description: string | null;
 }
 
 export interface BlogPostsResponse {
@@ -68,5 +72,21 @@ export interface RateBlogPost {
       author: string;
       tags: string[];
     };
+  };
+}
+
+export interface Bookmark {
+  user_id: string;
+  post_id: string;
+  title?: string;
+  author?: string;
+  created_at?: string;
+  tags?: string[];
+}
+
+export interface BlogPostBookmarks {
+  status: "success" | "fail";
+  data: {
+    bookmarks: Bookmark[];
   };
 }

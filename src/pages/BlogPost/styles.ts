@@ -1,5 +1,5 @@
 import { makeStyles } from "@mui/styles";
-import { grey } from "@mui/material/colors";
+import { grey, deepPurple, lightGreen } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme: any) => ({
   container: {
@@ -36,8 +36,44 @@ const useStyles = makeStyles((theme: any) => ({
     alignItems: "center",
     // justifyContent: "center",
   },
+  tagContainer: {
+    display: "flex",
+  },
+  tagItem: {
+    marginRight: theme.spacing(1),
+  },
   postText: {
     marginTop: theme.spacing(4),
+  },
+
+  //--------------action bar-------------------
+  containerActionBar: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
+  },
+  itemActionBar: {
+    marginBottom: theme.spacing(3),
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  actionBarBookmarkIconButton: {
+    "&:hover": {
+      backgroundColor: deepPurple[50],
+      color: deepPurple[400],
+    },
+  },
+
+  bookmarksLength: {
+    color: grey[700],
+  },
+
+  actionBarPinIconButton: {
+    "&:hover": {
+      backgroundColor: lightGreen[100],
+      color: lightGreen[700],
+    },
   },
 }));
 

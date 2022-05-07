@@ -11,6 +11,9 @@ import { useParams } from "react-router-dom";
 import moment from "../../utils/momentDate";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import UserInfoCard from "../../components/UserInfoCard";
+import TagItem from "../../components/TagItem";
+import BlogPostActionBar from "./BlogPostActionBar";
 
 const BlogPost: React.FC = () => {
   const classes = useStyles();
@@ -35,6 +38,12 @@ const BlogPost: React.FC = () => {
         <Grid container>
           <Grid item xs={12}>
             <Grid container spacing={2}>
+              <Grid item xs={1}>
+                <BlogPostActionBar
+                  pinned={post?.pinned}
+                  postId={post?.post_id}
+                />
+              </Grid>
               <Grid item xs={8} className={classes.postContainer}>
                 {isLoading && <div>Loading</div>}
                 {isError && <div>Something went wrong, please try again</div>}
@@ -61,6 +70,13 @@ const BlogPost: React.FC = () => {
                         {moment(post?.created_at!)}
                       </Typography>
                     </Box>
+                    <Box className={classes.tagContainer}>
+                      {post?.tags.map((tag, i) => (
+                        <Box key={`${tag}${i}`} className={classes.tagItem}>
+                          <TagItem tag={tag} />
+                        </Box>
+                      ))}
+                    </Box>
                     <Box className={classes.postText}>
                       <TextForPost body={post?.body!} />
                     </Box>
@@ -68,20 +84,23 @@ const BlogPost: React.FC = () => {
                 )}
               </Grid>
 
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <UserInfoCard
+                      user={{
+                        username: post?.author,
+                        avatar: post?.author_avatar,
+                        location: post?.author_location,
+                        name: post?.author_name,
+                        role: post?.author_role,
+                        description: post?.author_description,
+                      }}
+                    />
+                  </Grid>
                   <Grid item xs={12}>
                     {isSuccess && <BlogPostInfo data={post} />}
                   </Grid>
-                  {/* <Grid item xs={12}>
-                        <BlogTopPostCard />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <BlogTopPostCard />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <BlogTopPostCard />
-                      </Grid> */}
                 </Grid>
               </Grid>
             </Grid>

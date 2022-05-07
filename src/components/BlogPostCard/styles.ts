@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme: any) => ({
     fontWeight: "bold",
     color: blueGrey[700],
   },
-  tags: { marginTop: theme.spacing(2), color: theme.palette.text.secondary },
+  tags: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+  },
   coms: { marginTop: theme.spacing(2) },
   titleLink: {
     color: theme.palette.text.primary,

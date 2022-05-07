@@ -8,6 +8,8 @@ import TextEditor from "../../components/TextEditor";
 import { useCreateBlogPostMutation } from "../../services/blogPostApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import CKTextEditor from "../../components/TextEditor/CKTextEditor";
+import AddTag from "./AddTag";
 
 const CreateBlogPost: React.FC = () => {
   const classes = useStyles();
@@ -15,7 +17,7 @@ const CreateBlogPost: React.FC = () => {
     title: "",
     body: "",
     description: "",
-    tags: ["default"],
+    tags: [],
     // post_banner: "",
   });
   const [postSent, setPostSent] = useState(false);
@@ -24,20 +26,28 @@ const CreateBlogPost: React.FC = () => {
   const [createPost, { isLoading }] = useCreateBlogPostMutation();
 
   useEffect(() => {
+    // console.log(createPostState, "===========");
     if (postSent && createPostState.body.length > 0) {
-      createPost(createPostState).then((data: any) => {
-        console.log(data);
-        if (data.data.status === "success") {
-          toast("Successfully rated this post", { type: "success" });
-          navigate(`/blog-post/${data.data.data.post.post_id}`);
-        }
+      createPost(createPostState)
+        .then((data: any) => {
+          if (data.data?.status === "success") {
+            toast("Successfully rated this post", { type: "success" });
+            navigate(`/blog-post/${data.data.data.post.post_id}`);
+          }
 
-        if (data.data.status === "fail") {
+          if (data.error) {
+            throw new Error("Something went wrong, please try again");
+          }
+        })
+        .catch((err) => {
           toast("Something went wrong, please try again", { type: "error" });
-        }
-      });
+          setPostSent(false);
+        })
+        .finally(() => {
+          setPostSent(false);
+        });
     }
-  }, [postSent, createPostState.body]);
+  }, [postSent, createPostState]);
 
   const onChange = (event: React.ChangeEvent) => {
     setCreatePostState({
@@ -47,19 +57,6 @@ const CreateBlogPost: React.FC = () => {
       ).value,
     });
   };
-
-  // const handleAddChip = (chip: string) => {
-  //   setCreatePostState({
-  //     ...createPostState,
-  //     tags: [...createPostState.tags, chip.toLowerCase()],
-  //   });
-  // };
-  // const handleDeleteChip = (chip: string, index: number) => {
-  //   setCreatePostState({
-  //     ...createPostState,
-  //     tags: createPostState.tags.filter((chip, i) => i !== index),
-  //   });
-  // };
 
   const saveBodyData = (data: string) => {
     setCreatePostState((prevState) => ({
@@ -104,20 +101,15 @@ const CreateBlogPost: React.FC = () => {
               onChange={onChange}
             />
           </Grid>
-          {/* <Grid item xs={12}>
-            <div>
-              <ChipInput
-                placeholder="Add up to 4 tags..."
-                value={createPostState.tags}
-                onAdd={(chip) => handleAddChip(chip)}
-                onDelete={(chip, index) => handleDeleteChip(chip, index)}
-                disableUnderline
-                newChipKeyCodes={[32]}
-              />
-            </div>
-          </Grid> */}
+          <Grid item xs={12}>
+            <AddTag
+              setCreatePostState={setCreatePostState}
+              createPostState={createPostState}
+            />
+          </Grid>
           <Grid item xs={12}>
             <TextEditor isLoading={isLoading} saveBodyData={saveBodyData} />
+            {/* <CKTextEditor saveBodyData={saveBodyData} /> */}
           </Grid>
         </Grid>
       </CustomPaper>
