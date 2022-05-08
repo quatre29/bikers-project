@@ -10,6 +10,7 @@ import {
   useGetAllNormalBlogPostsQuery,
 } from "../../services/blogPostApi";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import QuickLinks from "../../components/QuickLinks";
 
 const HomePage: React.FC = () => {
   const classes = useStyles({ color: "red" });
@@ -29,29 +30,35 @@ const HomePage: React.FC = () => {
   } = useGetAllNormalBlogPostsQuery();
 
   return (
-    <Container maxWidth="lg" className={classes.container}>
+    <Container maxWidth="xl" className={classes.container}>
       {/* <CustomPaper> */}
       {isLoadingPinned && isLoadingNormal ? (
         <LoadingSpinner />
       ) : (
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <BlogHeader
-              data={dataPinned}
-              isError={isErrorPinned}
-              isSuccess={isSuccessPinned}
-            />
-            <Divider sx={(theme) => ({ marginTop: theme.spacing(2) })} />
+        <Grid container spacing={3}>
+          <Grid item md={2} display={{ sm: "none", md: "block" }}>
+            <QuickLinks />
           </Grid>
-          <Grid item md={8}>
-            <BlogFeed
-              data={dataNormal}
-              isError={isErrorNormal}
-              isSuccess={isSuccessNormal}
-            />
+          <Grid item xs={12} md={8}>
+            <Grid item xs={12}>
+              <BlogHeader
+                data={dataPinned}
+                isError={isErrorPinned}
+                isSuccess={isSuccessPinned}
+              />
+              <Divider sx={(theme) => ({ marginTop: theme.spacing(2) })} />
+            </Grid>
+            <Grid item md={12}>
+              <BlogFeed
+                data={dataNormal}
+                isError={isErrorNormal}
+                isSuccess={isSuccessNormal}
+              />
+            </Grid>
           </Grid>
-          <Grid item md={4}>
+          <Grid item md={2}>
             <BlogTopPosts />
+            asdsads
           </Grid>
         </Grid>
       )}

@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { Container, Grid, Typography, Box } from "@mui/material";
+import { Container, Grid, Typography, Box, Divider } from "@mui/material";
 import useStyles from "./styles";
 import CustomPaper from "../../components/CustomPaper";
-import BlogTopPostCard from "../../components/BlogTopPostCard";
 import UserAvatar from "../../components/UserAvatar";
 import TextForPost from "./TextForPost";
 import BlogPostInfo from "../../components/BlogPostInfo";
@@ -14,6 +13,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import UserInfoCard from "../../components/UserInfoCard";
 import TagItem from "../../components/TagItem";
 import BlogPostActionBar from "./BlogPostActionBar";
+import CommentSection from "../../components/CommentSection";
 
 const BlogPost: React.FC = () => {
   const classes = useStyles();
@@ -31,14 +31,14 @@ const BlogPost: React.FC = () => {
   const post = data?.data?.post;
 
   return (
-    <Container maxWidth="lg" className={classes.container}>
+    <Container maxWidth="xl" className={classes.container}>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
         <Grid container>
           <Grid item xs={12}>
             <Grid container spacing={2}>
-              <Grid item xs={1}>
+              <Grid item xs={0.5}>
                 <BlogPostActionBar
                   pinned={post?.pinned}
                   postId={post?.post_id}
@@ -80,11 +80,18 @@ const BlogPost: React.FC = () => {
                     <Box className={classes.postText}>
                       <TextForPost body={post?.body!} />
                     </Box>
+                    <Box className={classes.commentsContainer}>
+                      <Divider />
+                      <Typography variant="h5" className={classes.sectionTitle}>
+                        Discussions
+                      </Typography>
+                      <CommentSection />
+                    </Box>
                   </CustomPaper>
                 )}
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid item xs={3.5}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <UserInfoCard

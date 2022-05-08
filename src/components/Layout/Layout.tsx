@@ -2,11 +2,12 @@ import { Box } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import FabButton from "../FabButton";
+import Footer from "../Footer";
 import NavBar from "../NavBar";
 
 const Layout: React.FC = () => {
   return (
-    <main className="App">
+    <Box component="main">
       <NavBar />
       <Box
         sx={(theme) => ({
@@ -16,7 +17,8 @@ const Layout: React.FC = () => {
       ></Box>
       <Outlet />
       <FabButton />
-    </main>
+      <Footer />
+    </Box>
   );
 };
 

@@ -51,6 +51,10 @@ const useStyles = makeStyles((theme: any) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-end",
+    position: "sticky",
+    top: theme.spacing(10),
+    // overflowY: "scroll",
+    // overflowX: "hidden",
   },
   itemActionBar: {
     marginBottom: theme.spacing(3),
@@ -59,6 +63,7 @@ const useStyles = makeStyles((theme: any) => ({
     flexDirection: "column",
   },
   actionBarBookmarkIconButton: {
+    color: grey[700],
     "&:hover": {
       backgroundColor: deepPurple[50],
       color: deepPurple[400],
@@ -67,13 +72,29 @@ const useStyles = makeStyles((theme: any) => ({
 
   bookmarksLength: {
     color: grey[700],
+    fontWeight: "bold",
   },
 
   actionBarPinIconButton: {
+    color: grey[700],
+
     "&:hover": {
       backgroundColor: lightGreen[100],
       color: lightGreen[700],
     },
+  },
+
+  moreIcon: {
+    color: grey[700],
+  },
+
+  //-----------------comments----------------
+  commentsContainer: {
+    marginTop: theme.spacing(5),
+  },
+
+  sectionTitle: {
+    marginTop: theme.spacing(2),
   },
 }));
 

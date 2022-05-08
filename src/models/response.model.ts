@@ -90,3 +90,20 @@ export interface BlogPostBookmarks {
     bookmarks: Bookmark[];
   };
 }
+
+export interface BlogComment {
+  comment_id: string;
+  author: string;
+  post_id: string;
+  created_at: Date;
+  edited: boolean;
+  body: string;
+  author_avatar?: string;
+}
+
+export interface BlogPostsComments {
+  status: "success" | "fail";
+  data: {
+    comments: BlogComment[];
+  };
+}

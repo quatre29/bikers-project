@@ -31,6 +31,15 @@ export const ColorModeContextProvider: React.FC<ContextChildrenProps> = ({
   const theme = useMemo(
     () =>
       createTheme({
+        breakpoints: {
+          values: {
+            xs: 0,
+            sm: 600,
+            md: 900,
+            lg: 1200,
+            xl: 1360,
+          },
+        },
         palette: {
           mode: mode as PaletteMode,
           background: {

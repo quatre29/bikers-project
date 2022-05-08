@@ -36,7 +36,7 @@ function HideOnScroll(props: Props) {
   });
 
   return (
-    <Slide appear={false} direction='down' in={!trigger}>
+    <Slide appear={false} direction="down" in={!trigger}>
       {children}
     </Slide>
   );
@@ -56,7 +56,7 @@ const NavBar = (props: any) => {
         }}
         elevation={0}
       >
-        <Container maxWidth='lg'>
+        <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box className={classes.itemLink}>
               <Button
@@ -85,7 +85,7 @@ const NavBar = (props: any) => {
             <SearchItem />
             {/* <Box sx={{ flexGrow: 1 }} /> */}
             <Hidden smUp>
-              <IconButton size='large' onClick={() => setOpenDrawer(true)}>
+              <IconButton size="large" onClick={() => setOpenDrawer(true)}>
                 <MenuIcon />
               </IconButton>
             </Hidden>
@@ -98,10 +98,10 @@ const NavBar = (props: any) => {
           open={openDrawer}
           onOpen={() => setOpenDrawer(true)}
           onClose={() => setOpenDrawer(false)}
-          anchor='right'
+          anchor="right"
         >
           <Box>
-            <IconButton size='large' onClick={() => setOpenDrawer(false)}>
+            <IconButton size="large" onClick={() => setOpenDrawer(false)}>
               <ChevronRight />
             </IconButton>
           </Box>

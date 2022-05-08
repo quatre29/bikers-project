@@ -56,7 +56,9 @@ const BlogPostActionBar: React.FC<Props> = ({ postId, pinned }) => {
     <>
       <ModalConfirmation
         open={pinnedModal}
-        title="Are you sure you want to pin this post?"
+        title={`Are you sure you want to ${
+          !pinned ? "pin" : "unpin"
+        } this post?`}
         handleAgree={pinPost}
         handleClose={() => setPinnedModal(false)}
         loading={isLoadingPinning}
@@ -79,7 +81,9 @@ const BlogPostActionBar: React.FC<Props> = ({ postId, pinned }) => {
               {data.data.bookmarks.length}
             </Typography>
           ) : (
-            0
+            <Typography variant="body1" className={classes.bookmarksLength}>
+              0
+            </Typography>
           )}
         </Grid>
         <Grid
@@ -101,7 +105,7 @@ const BlogPostActionBar: React.FC<Props> = ({ postId, pinned }) => {
           alignItems="center"
           className={classes.itemActionBar}
         >
-          <IconButton>
+          <IconButton className={classes.moreIcon}>
             <MoreHorizRounded />
           </IconButton>
         </Grid>

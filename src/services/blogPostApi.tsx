@@ -6,6 +6,7 @@ import {
   BlogPostRatingResponse,
   RateBlogPost,
   BlogPostBookmarks,
+  BlogPostsComments,
 } from "../models/response.model";
 
 export const blogPostApi = createApi({
@@ -17,7 +18,14 @@ export const blogPostApi = createApi({
     },
     credentials: "include",
   }),
-  tagTypes: ["BlogPosts", "BlogPost", "BlogPostRating"],
+  tagTypes: [
+    "BlogPosts",
+    "BlogPost",
+    "BlogPostRating",
+    "BlogComments",
+    "BlogComment",
+    "Bookmarks",
+  ],
 
   endpoints: (builder) => ({
     //TODO: pagination query
@@ -94,6 +102,7 @@ export const blogPostApi = createApi({
         url: `/api/blog-posts/${post_id}/bookmarks`,
         method: "GET",
       }),
+      providesTags: ["Bookmarks"],
     }),
 
     pinBlogPost: builder.mutation<
@@ -110,6 +119,14 @@ export const blogPostApi = createApi({
       }),
       invalidatesTags: ["BlogPosts", "BlogPost"],
     }),
+
+    getBlogPostComments: builder.query<BlogPostsComments, string>({
+      query: (post_id) => ({
+        url: `/api/blog-posts/${post_id}/comments`,
+        method: "GET",
+      }),
+      providesTags: ["BlogComments"],
+    }),
   }),
 });
 
@@ -123,4 +140,5 @@ export const {
   useCreateBlogPostMutation,
   useGetBookmarksByPostQuery,
   usePinBlogPostMutation,
+  useGetBlogPostCommentsQuery,
 } = blogPostApi;
