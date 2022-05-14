@@ -18,6 +18,7 @@ import Layout from "./components/Layout";
 import NotFound from "./pages/NotFound";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
 import CreateBlogPost from "./pages/CreateBlogPost";
+import EditBlogPost from "./pages/EditBlogPost/EditBlogPost";
 
 const App: React.FC = () => {
   return (
@@ -31,6 +32,7 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/forum" element={<ForumHomePage />} />
           <Route path="/new-blog" element={<CreateBlogPost />} />
+          <Route path="/edit-blog/:post_id" element={<EditBlogPost />} />
           <Route path="/forum/:category" element={<ForumCategoryPage />} />
           <Route
             path="/forum/:category_slug/:forum_slug"

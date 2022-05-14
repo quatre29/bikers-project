@@ -29,14 +29,22 @@ import ModalConfirmation from "../../components/ModalConfirmation";
 import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { BlogPostCreation } from "../../models/state.model";
+import { BlogPost } from "../../models/response.model";
 
 interface Props {
   postId: string | number | undefined;
   pinned: boolean | undefined;
   author: string | undefined;
+  post: BlogPost;
 }
 
-const BlogPostActionBar: React.FC<Props> = ({ postId, pinned, author }) => {
+const BlogPostActionBar: React.FC<Props> = ({
+  postId,
+  pinned,
+  author,
+  post,
+}) => {
   const classes = useStyles();
   const [pinnedModal, setPinnedModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -63,7 +71,6 @@ const BlogPostActionBar: React.FC<Props> = ({ postId, pinned, author }) => {
   ] = useDeleteBlogPostMutation();
 
   useEffect(() => {
-    console.log(isDeletePostLoading, isDeletePostSuccess, "====098");
     if (isDeletePostSuccess) {
       toast("Blog post deleted", { type: "success" });
       navigate("/");
@@ -106,6 +113,10 @@ const BlogPostActionBar: React.FC<Props> = ({ postId, pinned, author }) => {
   const openDeleteModal = () => {
     setDeleteModal(true);
     handleCloseMenu();
+  };
+
+  const editBlogPost = () => {
+    navigate(`/edit-blog/${postId}`, { replace: true, state: { post } });
   };
 
   const pinIcon = pinned ? <PushPinRounded /> : <PushPinOutlined />;
@@ -195,7 +206,7 @@ const BlogPostActionBar: React.FC<Props> = ({ postId, pinned, author }) => {
               </MenuItem>
             )}
             {user?.username === author && (
-              <MenuItem onClick={handleCloseMenu}>
+              <MenuItem onClick={editBlogPost}>
                 <ListItemIcon>
                   <EditRounded />
                 </ListItemIcon>

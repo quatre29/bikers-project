@@ -5,3 +5,8 @@ export interface BlogPostCreation {
   tags: string[];
   post_banner?: string;
 }
+
+export interface BlogPostUpdate {
+  post_id: string;
+  body: BlogPostCreation;
+}

@@ -1,14 +1,23 @@
 import React, { useState, useRef, useEffect, Dispatch } from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { BlogPostCreation } from "../../models/state.model";
 import { Editor } from "@tinymce/tinymce-react";
 
 interface Props {
   saveBodyData: (data: string) => void;
+  cancelEdit?: () => void;
   isLoading: boolean;
+  edit?: boolean;
+  initialValue: string;
 }
 
-const TextEditor: React.FC<Props> = ({ saveBodyData, isLoading }) => {
+const TextEditor: React.FC<Props> = ({
+  saveBodyData,
+  isLoading,
+  edit,
+  initialValue,
+  cancelEdit,
+}) => {
   const editorRef = useRef<any>(null);
 
   const log = () => {
@@ -25,7 +34,7 @@ const TextEditor: React.FC<Props> = ({ saveBodyData, isLoading }) => {
       <Editor
         apiKey="6xa942bzxudtaaubf77g772z6thuetqw2ltdt987lecnm94u"
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>This is the initial content of the editor.</p>"
+        initialValue={initialValue}
         init={{
           height: 500,
           menubar: true,
@@ -58,8 +67,17 @@ const TextEditor: React.FC<Props> = ({ saveBodyData, isLoading }) => {
           //     "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <button onClick={log}>Post</button>
-      {isLoading && <div>Creating post...</div>}
+      <Box sx={(theme) => ({ marginTop: theme.spacing(4) })}>
+        <Button variant="contained" color="primary" onClick={log}>
+          {edit ? "Save changes" : "Post"}
+        </Button>
+        {edit && cancelEdit && (
+          <Button variant="text" color="error" onClick={cancelEdit}>
+            Cancel
+          </Button>
+        )}
+        {isLoading && <div>Creating post...</div>}
+      </Box>
     </>
   );
 };

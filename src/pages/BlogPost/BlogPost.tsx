@@ -43,6 +43,7 @@ const BlogPost: React.FC = () => {
                   pinned={post?.pinned}
                   postId={post?.post_id}
                   author={post?.author}
+                  post={post!}
                 />
               </Grid>
               <Grid item xs={8} className={classes.postContainer}>

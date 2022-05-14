@@ -10,6 +10,7 @@ import {
   BlogComment,
   BlogCommentRes,
 } from "../models/response.model";
+import { BlogPostCreation, BlogPostUpdate } from "../models/state.model";
 
 export const blogPostApi = createApi({
   reducerPath: "blogPostApi",
@@ -129,6 +130,15 @@ export const blogPostApi = createApi({
       }),
       invalidatesTags: ["BlogPosts"],
     }),
+
+    updateBlogPost: builder.mutation<BlogPostResponse, BlogPostUpdate>({
+      query: (body) => ({
+        url: `/api/blog-posts/${body.post_id}/edit`,
+        method: "PATCH",
+        body: body.body,
+      }),
+      invalidatesTags: ["BlogPosts", "BlogPost"],
+    }),
   }),
 });
 
@@ -143,4 +153,5 @@ export const {
   useGetBookmarksByPostQuery,
   usePinBlogPostMutation,
   useDeleteBlogPostMutation,
+  useUpdateBlogPostMutation,
 } = blogPostApi;
