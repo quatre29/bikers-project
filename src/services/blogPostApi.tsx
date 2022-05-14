@@ -9,6 +9,7 @@ import {
   BlogPostsComments,
   BlogComment,
   BlogCommentRes,
+  BookmarkRes,
 } from "../models/response.model";
 import { BlogPostCreation, BlogPostUpdate } from "../models/state.model";
 
@@ -108,6 +109,22 @@ export const blogPostApi = createApi({
       providesTags: ["Bookmarks"],
     }),
 
+    bookmarkPost: builder.mutation<BookmarkRes, string>({
+      query: (post_id) => ({
+        url: `/api/blog-posts/${post_id}/bookmarks`,
+        method: "POST",
+      }),
+      invalidatesTags: ["BlogPost", "Bookmarks"],
+    }),
+
+    unBookmarkPost: builder.mutation<BookmarkRes, string>({
+      query: (post_id) => ({
+        url: `/api/blog-posts/${post_id}/bookmarks`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["BlogPost", "Bookmarks"],
+    }),
+
     pinBlogPost: builder.mutation<
       BlogPostResponse,
       {
@@ -154,4 +171,6 @@ export const {
   usePinBlogPostMutation,
   useDeleteBlogPostMutation,
   useUpdateBlogPostMutation,
+  useBookmarkPostMutation,
+  useUnBookmarkPostMutation,
 } = blogPostApi;

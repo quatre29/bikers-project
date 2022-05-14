@@ -32,6 +32,7 @@ export interface BlogPost {
   author_role: string;
   author_location: string | null;
   author_description: string | null;
+  bookmarked: boolean;
 }
 
 export interface BlogPostsResponse {
@@ -82,6 +83,16 @@ export interface Bookmark {
   author?: string;
   created_at?: string;
   tags?: string[];
+}
+
+export interface BookmarkRes {
+  status: string;
+  data: {
+    post: {
+      user_id: string;
+      post_id: string;
+    };
+  };
 }
 
 export interface BlogPostBookmarks {

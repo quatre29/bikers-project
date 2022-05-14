@@ -8,8 +8,8 @@ import {
   ListItemIcon,
 } from "@mui/material";
 import {
+  BookmarkRounded,
   BookmarkBorderRounded,
-  BookmarkBorderOutlined,
   PushPinOutlined,
   PushPinRounded,
   MoreHorizRounded,
@@ -20,9 +20,11 @@ import {
 
 import useStyles from "./styles";
 import {
+  useBookmarkPostMutation,
   useDeleteBlogPostMutation,
   useGetBookmarksByPostQuery,
   usePinBlogPostMutation,
+  useUnBookmarkPostMutation,
 } from "../../services/blogPostApi";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import ModalConfirmation from "../../components/ModalConfirmation";
@@ -69,6 +71,38 @@ const BlogPostActionBar: React.FC<Props> = ({
       isError: isDeletePostError,
     },
   ] = useDeleteBlogPostMutation();
+
+  const [
+    bookmarkPost,
+    { isSuccess: isBookmarkSuccess, isError: isBookmarkError },
+  ] = useBookmarkPostMutation();
+
+  const [
+    unBookmarkPost,
+    { isSuccess: isUnBookmarkSuccess, isError: isUnBookmarkError },
+  ] = useUnBookmarkPostMutation();
+
+  //--------------------------------------
+  useEffect(() => {
+    if (isBookmarkSuccess) {
+      toast("Successfully bookmarked this post", { type: "success" });
+    }
+
+    if (isBookmarkError) {
+      toast("Something wrong happened, please try again", { type: "error" });
+    }
+  }, [isBookmarkSuccess, isBookmarkError]);
+
+  useEffect(() => {
+    if (isUnBookmarkSuccess) {
+      toast("Successfully unbookmarked this post", { type: "success" });
+    }
+    if (isBookmarkError || isUnBookmarkError) {
+      toast("Something wrong happened, please try again", { type: "error" });
+    }
+  }, [, isUnBookmarkSuccess, , isUnBookmarkError]);
+
+  //--------------------------------------
 
   useEffect(() => {
     if (isDeletePostSuccess) {
@@ -119,7 +153,20 @@ const BlogPostActionBar: React.FC<Props> = ({
     navigate(`/edit-blog/${postId}`, { replace: true, state: { post } });
   };
 
+  const bookmarkAction = () => {
+    if (post.bookmarked) {
+      unBookmarkPost(postId as string);
+    } else {
+      bookmarkPost(postId as string);
+    }
+  };
+
   const pinIcon = pinned ? <PushPinRounded /> : <PushPinOutlined />;
+  const bookmarkIcon = post.bookmarked ? (
+    <BookmarkRounded />
+  ) : (
+    <BookmarkBorderRounded />
+  );
 
   return (
     <>
@@ -147,8 +194,11 @@ const BlogPostActionBar: React.FC<Props> = ({
           alignItems="center"
           className={classes.itemActionBar}
         >
-          <IconButton className={classes.actionBarBookmarkIconButton}>
-            <BookmarkBorderOutlined />
+          <IconButton
+            onClick={bookmarkAction}
+            className={classes.actionBarBookmarkIconButton}
+          >
+            {bookmarkIcon}
           </IconButton>
           {isSuccess ? (
             <Typography variant="body1" className={classes.bookmarksLength}>
