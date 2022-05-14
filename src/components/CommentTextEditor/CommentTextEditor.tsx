@@ -20,6 +20,7 @@ const CommentTextEditor: React.FC<Props> = ({ saveBodyData, isLoading }) => {
         );
         return;
       }
+      editorRef.current.resetContent();
       saveBodyData(content);
     }
   };

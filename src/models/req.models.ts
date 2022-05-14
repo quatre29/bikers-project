@@ -5,3 +5,8 @@ export interface BlogPostReq {
   tags?: string[];
   post_banner?: string;
 }
+
+export interface BlogCommentReq {
+  post_id: string;
+  comment: { body: string };
+}

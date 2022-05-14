@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { BlogPostReq } from "../models/req.models";
+import { BlogCommentReq, BlogPostReq } from "../models/req.models";
 import {
   BlogPostsResponse,
   BlogPostResponse,
@@ -7,6 +7,8 @@ import {
   RateBlogPost,
   BlogPostBookmarks,
   BlogPostsComments,
+  BlogComment,
+  BlogCommentRes,
 } from "../models/response.model";
 
 export const blogPostApi = createApi({
@@ -120,12 +122,40 @@ export const blogPostApi = createApi({
       invalidatesTags: ["BlogPosts", "BlogPost"],
     }),
 
+    deleteBlogPost: builder.mutation<void, string | number | undefined>({
+      query: (post_id) => ({
+        url: `/api/blog-posts/${post_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["BlogPosts"],
+    }),
+
     getBlogPostComments: builder.query<BlogPostsComments, string>({
       query: (post_id) => ({
         url: `/api/blog-posts/${post_id}/comments`,
         method: "GET",
       }),
       providesTags: ["BlogComments"],
+    }),
+
+    postBlogComment: builder.mutation<BlogCommentRes, BlogCommentReq>({
+      query: (body) => ({
+        url: `/api/blog-posts/${body.post_id}/comments`,
+        method: "POST",
+        body: body.comment,
+      }),
+      invalidatesTags: ["BlogComments"],
+    }),
+
+    deleteBlogComment: builder.mutation<
+      void,
+      { post_id: string; comment_id: string }
+    >({
+      query: ({ post_id, comment_id }) => ({
+        url: `/api/blog-posts/${post_id}/comments/${comment_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["BlogComments"],
     }),
   }),
 });
@@ -140,5 +170,8 @@ export const {
   useCreateBlogPostMutation,
   useGetBookmarksByPostQuery,
   usePinBlogPostMutation,
+  useDeleteBlogPostMutation,
   useGetBlogPostCommentsQuery,
+  usePostBlogCommentMutation,
+  useDeleteBlogCommentMutation,
 } = blogPostApi;

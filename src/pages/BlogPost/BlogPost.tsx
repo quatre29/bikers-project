@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Grid, Typography, Box, Divider } from "@mui/material";
 import useStyles from "./styles";
 import CustomPaper from "../../components/CustomPaper";
@@ -42,6 +42,7 @@ const BlogPost: React.FC = () => {
                 <BlogPostActionBar
                   pinned={post?.pinned}
                   postId={post?.post_id}
+                  author={post?.author}
                 />
               </Grid>
               <Grid item xs={8} className={classes.postContainer}>

@@ -101,6 +101,13 @@ export interface BlogComment {
   author_avatar?: string;
 }
 
+export interface BlogCommentRes {
+  status: "success" | "fail";
+  data: {
+    comment: BlogComment;
+  };
+}
+
 export interface BlogPostsComments {
   status: "success" | "fail";
   data: {
