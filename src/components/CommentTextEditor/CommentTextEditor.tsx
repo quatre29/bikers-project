@@ -1,13 +1,23 @@
 import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { toast } from "react-toastify";
+import { Button, Box } from "@mui/material";
 
 interface Props {
   saveBodyData: (data: string) => void;
+  cancelEdit?: () => void;
   isLoading: boolean;
+  initialValue?: string;
+  edit?: boolean;
 }
 
-const CommentTextEditor: React.FC<Props> = ({ saveBodyData, isLoading }) => {
+const CommentTextEditor: React.FC<Props> = ({
+  saveBodyData,
+  isLoading,
+  initialValue = "",
+  edit,
+  cancelEdit,
+}) => {
   const editorRef = useRef<any>(null);
 
   const log = () => {
@@ -30,7 +40,7 @@ const CommentTextEditor: React.FC<Props> = ({ saveBodyData, isLoading }) => {
       <Editor
         apiKey="6xa942bzxudtaaubf77g772z6thuetqw2ltdt987lecnm94u"
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue=""
+        initialValue={initialValue}
         init={{
           height: 200,
           menubar: false,
@@ -41,8 +51,17 @@ const CommentTextEditor: React.FC<Props> = ({ saveBodyData, isLoading }) => {
           //     "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <button onClick={log}>Post</button>
-      {isLoading && <div>Creating post...</div>}
+      <Box sx={(theme) => ({ marginTop: theme.spacing(2) })}>
+        <Button variant="contained" color="primary" onClick={log}>
+          {edit ? "Save changes" : "Post"}
+        </Button>
+        {edit && (
+          <Button variant="text" color="error" onClick={cancelEdit}>
+            Cancel
+          </Button>
+        )}
+        {isLoading && <div>Creating post...</div>}
+      </Box>
     </>
   );
 };

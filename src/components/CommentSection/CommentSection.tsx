@@ -8,7 +8,7 @@ import {
   useDeleteBlogCommentMutation,
   useGetBlogPostCommentsQuery,
   usePostBlogCommentMutation,
-} from "../../services/blogPostApi";
+} from "../../services/blogCommentsApi";
 import { useParams } from "react-router-dom";
 import LoadingSpinner from "../LoadingSpinner";
 import { toast } from "react-toastify";
@@ -76,6 +76,7 @@ const CommentSection: React.FC = () => {
               key={`${i}${comment.comment_id}`}
               comment={comment}
               deleteComment={deleteComment}
+              postId={id!}
             />
           ))
         )}

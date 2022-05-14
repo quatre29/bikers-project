@@ -8,5 +8,6 @@ export interface BlogPostReq {
 
 export interface BlogCommentReq {
   post_id: string;
+  comment_id?: string;
   comment: { body: string };
 }

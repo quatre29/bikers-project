@@ -129,34 +129,6 @@ export const blogPostApi = createApi({
       }),
       invalidatesTags: ["BlogPosts"],
     }),
-
-    getBlogPostComments: builder.query<BlogPostsComments, string>({
-      query: (post_id) => ({
-        url: `/api/blog-posts/${post_id}/comments`,
-        method: "GET",
-      }),
-      providesTags: ["BlogComments"],
-    }),
-
-    postBlogComment: builder.mutation<BlogCommentRes, BlogCommentReq>({
-      query: (body) => ({
-        url: `/api/blog-posts/${body.post_id}/comments`,
-        method: "POST",
-        body: body.comment,
-      }),
-      invalidatesTags: ["BlogComments"],
-    }),
-
-    deleteBlogComment: builder.mutation<
-      void,
-      { post_id: string; comment_id: string }
-    >({
-      query: ({ post_id, comment_id }) => ({
-        url: `/api/blog-posts/${post_id}/comments/${comment_id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["BlogComments"],
-    }),
   }),
 });
 
@@ -171,7 +143,4 @@ export const {
   useGetBookmarksByPostQuery,
   usePinBlogPostMutation,
   useDeleteBlogPostMutation,
-  useGetBlogPostCommentsQuery,
-  usePostBlogCommentMutation,
-  useDeleteBlogCommentMutation,
 } = blogPostApi;

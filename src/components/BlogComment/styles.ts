@@ -45,6 +45,11 @@ const useStyles = makeStyles((theme: any) => ({
   editedContainer: {
     marginTop: theme.spacing(1),
   },
+
+  commentEditorContainer: {
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+  },
 }));
 
 export default useStyles;

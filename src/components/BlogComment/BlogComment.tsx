@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Grid,
@@ -20,16 +20,21 @@ import { BlogComment as BlogCommentInterface } from "../../models/response.model
 import moment from "../../utils/momentDate";
 import { useAuth } from "../../hooks/useAuth";
 import ModalConfirmation from "../ModalConfirmation";
+import CommentTextEditor from "../CommentTextEditor";
+import { useUpdateBlogCommentMutation } from "../../services/blogCommentsApi";
+import { toast } from "react-toastify";
 
 interface Props {
   comment: BlogCommentInterface;
   deleteComment: (comment_id: string) => void;
+  postId: string;
 }
 
-const BlogComment: React.FC<Props> = ({ comment, deleteComment }) => {
+const BlogComment: React.FC<Props> = ({ comment, deleteComment, postId }) => {
   const classes = useStyles();
   const [anchorMenu, setAnchorMenu] = useState<null | HTMLElement>(null);
   const [deleteCommentModal, setDeleteCommentModal] = useState(false);
+  const [commentEditorOpen, setCommentEditorOpen] = useState(false);
 
   const { user, isLoading } = useAuth();
 
@@ -42,6 +47,26 @@ const BlogComment: React.FC<Props> = ({ comment, deleteComment }) => {
     comment_id,
     post_id,
   } = comment;
+
+  const [
+    editComment,
+    {
+      isLoading: isEditCommentLoading,
+      isSuccess: isEditCommentSuccess,
+      isError: isEditCommentError,
+    },
+  ] = useUpdateBlogCommentMutation();
+
+  useEffect(() => {
+    if (isEditCommentSuccess) {
+      toast("Comment successfully updated", { type: "success" });
+      setCommentEditorOpen(false);
+    }
+
+    if (isEditCommentError) {
+      toast("Something went wrong, please try again", { type: "error" });
+    }
+  }, [isEditCommentError, isEditCommentSuccess]);
 
   const handleCloseMenu = () => {
     setAnchorMenu(null);
@@ -65,6 +90,18 @@ const BlogComment: React.FC<Props> = ({ comment, deleteComment }) => {
     handleCloseMenu();
   };
 
+  const handleEditComment = () => {
+    setCommentEditorOpen(true);
+    handleCloseMenu();
+  };
+  const saveChanges = (data: string) => {
+    editComment({
+      post_id: postId,
+      comment_id: comment.comment_id,
+      comment: { body: data },
+    });
+  };
+
   return (
     <>
       <ModalConfirmation
@@ -73,6 +110,7 @@ const BlogComment: React.FC<Props> = ({ comment, deleteComment }) => {
         handleAgree={removeComment}
         handleClose={cancelModal}
       />
+
       <Grid container className={classes.container}>
         <Grid item xs={1} className={classes.avatarContainer}>
           <UserAvatar image={author_avatar} size={{ height: 25, width: 25 }} />
@@ -122,12 +160,15 @@ const BlogComment: React.FC<Props> = ({ comment, deleteComment }) => {
                     Remove
                   </MenuItem>
                 )}
-                <MenuItem onClick={handleCloseMenu}>
-                  <ListItemIcon>
-                    <EditRounded />
-                  </ListItemIcon>
-                  Edit
-                </MenuItem>
+                {user?.username === author && (
+                  <MenuItem onClick={handleEditComment}>
+                    <ListItemIcon>
+                      <EditRounded />
+                    </ListItemIcon>
+                    Edit
+                  </MenuItem>
+                )}
+
                 <MenuItem onClick={handleCloseMenu}>
                   <ListItemIcon>
                     <FlagRounded />
@@ -149,6 +190,17 @@ const BlogComment: React.FC<Props> = ({ comment, deleteComment }) => {
           </Grid>
         </Grid>
       </Grid>
+      {commentEditorOpen && (
+        <Box className={classes.commentEditorContainer}>
+          <CommentTextEditor
+            initialValue={body}
+            saveBodyData={saveChanges}
+            isLoading={false}
+            edit
+            cancelEdit={() => setCommentEditorOpen(false)}
+          />
+        </Box>
+      )}
     </>
   );
 };
