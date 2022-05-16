@@ -1,7 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
+import UserProfileContent from "../UserProfileContent";
+import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { useGetUserByIdQuery } from "../../services/userApi";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const UserProfile: React.FC = () => {
-  return <div>UserProfile</div>;
-};
+  const { user_id } = useParams();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
+  const { data, isLoading: isGetUserLoading } = useGetUserByIdQuery(user_id!);
+
+  console.log(user_id, data, "000", user);
+
+  const userProfile = data?.data.user;
+
+  useEffect(() => {
+    if (user_id === user?.user_id) {
+      navigate("/my-profile", { replace: true });
+    }
+  }, [user_id, user]);
+
+  useEffect(() => {
+    if (data === undefined && !isGetUserLoading) {
+      navigate("/404", { replace: true });
+    }
+  }, [data, isGetUserLoading]);
+
+  return (
+    <>
+      {data && !isGetUserLoading ? (
+        <UserProfileContent user={userProfile!} />
+      ) : (
+        <LoadingSpinner />
+      )}
+    </>
+  );
+};
+{
+  /* <UserProfileContent /> */
+}
 export default UserProfile;

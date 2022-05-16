@@ -14,6 +14,8 @@ import UserInfoCard from "../../components/UserInfoCard";
 import TagItem from "../../components/TagItem";
 import BlogPostActionBar from "./BlogPostActionBar";
 import CommentSection from "../../components/CommentSection";
+import BlogDescriptionCard from "./BlogDescriptionCard";
+import RoleBadge from "../../components/RoleBadge";
 
 const BlogPost: React.FC = () => {
   const classes = useStyles();
@@ -107,6 +109,15 @@ const BlogPost: React.FC = () => {
                       }}
                     />
                   </Grid>
+
+                  <Grid item xs={12}>
+                    <RoleBadge role={post?.author_role!} />
+                  </Grid>
+                  {post?.description && (
+                    <Grid item xs={12}>
+                      <BlogDescriptionCard description={post.description} />
+                    </Grid>
+                  )}
                   <Grid item xs={12}>
                     {isSuccess && <BlogPostInfo data={post} />}
                   </Grid>

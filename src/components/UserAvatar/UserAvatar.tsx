@@ -35,7 +35,10 @@ interface AvatarProps {
   className?: { [prop: string]: string };
   userId?: string;
   online?: boolean;
-  size?: { width: number; height: number };
+  size?: {
+    width: number | string;
+    height: number | string;
+  };
   variant?: "square" | "circular" | "rounded";
   image?: string;
 }

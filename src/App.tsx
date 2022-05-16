@@ -4,7 +4,6 @@ import NavBar from "./components/NavBar";
 import BlogPost from "./pages/BlogPost";
 import ForumHomePage from "./pages/ForumHomePage";
 import HomePage from "./pages/HomePage";
-import UserProfile from "./pages/UserProfile";
 import UserSettings from "./pages/UserSettings";
 import { Box } from "@mui/material";
 import ForumCategoryPage from "./pages/ForumCategoryPage";
@@ -19,6 +18,8 @@ import NotFound from "./pages/NotFound";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
 import CreateBlogPost from "./pages/CreateBlogPost";
 import EditBlogPost from "./pages/EditBlogPost/EditBlogPost";
+import MyProfile from "./pages/MyProfile";
+import UserProfile from "./pages/UserProfile";
 
 const App: React.FC = () => {
   return (
@@ -44,7 +45,9 @@ const App: React.FC = () => {
           />
 
           <Route path="/settings" element={<UserSettings />} />
-          <Route path="/my-profile" element={<UserProfile />} />
+          <Route path="/my-profile" element={<MyProfile />} />
+          <Route path="/user-profile/:user_id" element={<UserProfile />} />
+
           <Route path="/blog-post/:id" element={<BlogPost />} />
         </Route>
       </Route>

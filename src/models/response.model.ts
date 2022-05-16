@@ -2,14 +2,15 @@ export interface UserResponse {
   status: "success" | "fail";
   data: {
     user: {
-      user_id: String;
-      username: String;
-      avatar: String;
-      name: String;
-      email: String;
-      location: String | null;
-      role: "member" | "moderator" | "admin";
-      active: Boolean;
+      user_id: string;
+      username: string;
+      avatar: string;
+      name: string;
+      email: string;
+      location: string | null;
+      role: "member" | "moderator" | "admin" | "developer" | "blogger";
+      active: boolean;
+      description: string;
     };
   };
 }
@@ -29,7 +30,7 @@ export interface BlogPost {
   author_avatar: string;
   comments_count: string | number;
   author_name: string;
-  author_role: string;
+  author_role: "member" | "moderator" | "admin" | "developer" | "blogger";
   author_location: string | null;
   author_description: string | null;
   bookmarked: boolean;
