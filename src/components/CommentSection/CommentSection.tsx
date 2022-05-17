@@ -29,7 +29,6 @@ const CommentSection: React.FC<Props> = ({ userId }) => {
     useDeleteBlogCommentMutation();
 
   const sendComment = (data: string) => {
-    console.log(data, "09887");
     postCommentQuery({ post_id: id!, comment: { body: data } }).then(
       (data: any) => {
         if (data.data?.status === "success") {

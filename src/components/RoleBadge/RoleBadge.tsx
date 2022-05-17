@@ -7,7 +7,7 @@ import memberBadge from "../../assets/badges/member_badge.svg";
 
 interface Props {
   role: "admin" | "moderator" | "developer" | "member" | "blogger";
-  size?: "sm" | "md" | "lg" | "xl" | "100%";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "100%";
 }
 
 const roleLookup = {
@@ -19,7 +19,8 @@ const roleLookup = {
 };
 
 const sizeLookup = {
-  sm: { width: "auto", height: 100 },
+  xs: { width: "auto", height: 100 },
+  sm: { width: "auto", height: 150 },
   md: { width: "auto", height: 250 },
   lg: { width: "auto", height: 350 },
   xl: { width: "auto", height: 500 },

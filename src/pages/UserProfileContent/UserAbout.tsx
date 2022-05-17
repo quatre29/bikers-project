@@ -13,7 +13,6 @@ interface Props {
 const UserAbout: React.FC<Props> = ({ userDetails }) => {
   const classes = useStyles();
 
-  console.log(userDetails, "===");
   return (
     <div className={classes.categoryContainer}>
       <CustomPaper>

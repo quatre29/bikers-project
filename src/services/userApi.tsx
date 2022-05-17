@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { UserResponse } from "../models/response.model";
+import {
+  BlogBookmarksRes,
+  UserResponse,
+  UsersResponse,
+} from "../models/response.model";
 import { User } from "../models/user.model";
 
 export const userApi = createApi({
@@ -11,7 +15,7 @@ export const userApi = createApi({
     },
     credentials: "include",
   }),
-  tagTypes: ["User", "Users"],
+  tagTypes: ["User", "Users", "SearchedUsers", "MyBookmarks"],
 
   endpoints: (builder) => ({
     getUserById: builder.query<UserResponse, string>({
@@ -19,8 +23,29 @@ export const userApi = createApi({
         url: `/api/users/${user_id}`,
         method: "GET",
       }),
+      providesTags: ["User"],
+    }),
+
+    getUsersBySearch: builder.query<UsersResponse, string>({
+      query: (queryString) => ({
+        url: `/api/users/partial_name/${queryString}`,
+        method: "GET",
+      }),
+      providesTags: ["SearchedUsers"],
+    }),
+
+    getMyBookmarks: builder.query<BlogBookmarksRes, void>({
+      query: () => ({
+        url: "/api/users/my_bookmarks",
+        method: "GET",
+      }),
+      providesTags: ["MyBookmarks"],
     }),
   }),
 });
 
-export const { useGetUserByIdQuery } = userApi;
+export const {
+  useGetUserByIdQuery,
+  useGetUsersBySearchQuery,
+  useGetMyBookmarksQuery,
+} = userApi;

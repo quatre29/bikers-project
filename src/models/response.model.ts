@@ -1,3 +1,5 @@
+import { User } from "./user.model";
+
 export interface UserResponse {
   status: "success" | "fail";
   data: {
@@ -12,6 +14,13 @@ export interface UserResponse {
       active: boolean;
       description: string;
     };
+  };
+}
+
+export interface UsersResponse {
+  status: "success" | "fail";
+  data: {
+    users: User[];
   };
 }
 
@@ -83,21 +92,12 @@ export interface Bookmark {
   post_id: string;
   title?: string;
   author?: string;
+  author_name: string;
   created_at?: string;
   tags?: string[];
 }
 
-export interface BookmarkRes {
-  status: string;
-  data: {
-    post: {
-      user_id: string;
-      post_id: string;
-    };
-  };
-}
-
-export interface BlogPostBookmarks {
+export interface BlogBookmarksRes {
   status: "success" | "fail";
   data: {
     bookmarks: Bookmark[];

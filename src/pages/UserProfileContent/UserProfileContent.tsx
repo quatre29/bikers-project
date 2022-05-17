@@ -7,6 +7,7 @@ import HeaderProfile from "./HeaderProfile";
 import UserAbout from "./UserAbout";
 import Badges from "./Badges";
 import { User } from "../../models/user.model";
+import GoToTop from "../../utils/GoToTop";
 
 interface Props {
   user: User;
@@ -34,6 +35,7 @@ const UserProfile: React.FC<Props> = ({ user, myProfile }) => {
         </Grid>
         <Grid item xs={7}></Grid>
       </Grid>
+      <GoToTop />
     </Container>
   );
 };

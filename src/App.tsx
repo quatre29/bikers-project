@@ -24,6 +24,7 @@ import TagPage from "./pages/TagPage";
 import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import UnderConstruction from "./pages/UnderConstruction";
+import SearchPage from "./pages/SearchPage/SearchPage";
 
 const App: React.FC = () => {
   return (
@@ -65,6 +66,7 @@ const App: React.FC = () => {
           <Route path="/about" element={<UnderConstruction />} />
           <Route path="/contact" element={<UnderConstruction />} />
           <Route path="/faq" element={<UnderConstruction />} />
+          <Route path="/search" element={<SearchPage />} />
 
           <Route path="/settings" element={<UserSettings />} />
           <Route path="/my-profile" element={<MyProfile />} />

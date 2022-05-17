@@ -7,9 +7,9 @@ const useStyles = makeStyles((theme: any) => ({
     position: "relative",
     marginRight: theme.spacing(2),
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    backgroundColor: alpha(theme.palette.common.black, 0.05),
     "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.palette.common.black, 0.1),
     },
     [theme.breakpoints.down("md")]: {
       marginLeft: theme.spacing(6),
@@ -30,10 +30,11 @@ const useStyles = makeStyles((theme: any) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    color: grey[700],
   },
   inputBase: {
     "& .MuiInputBase-input": {
-      color: grey[50],
+      color: grey[700],
 
       padding: theme.spacing(1, 1, 1, 0),
       // vertical padding + font size from searchIcon

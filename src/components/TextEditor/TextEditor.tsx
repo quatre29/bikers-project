@@ -23,7 +23,6 @@ const TextEditor: React.FC<Props> = ({
   const log = () => {
     if (editorRef.current) {
       const content = editorRef.current.getContent();
-      console.log(content, "content");
 
       saveBodyData(content);
     }

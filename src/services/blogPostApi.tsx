@@ -5,11 +5,10 @@ import {
   BlogPostResponse,
   BlogPostRatingResponse,
   RateBlogPost,
-  BlogPostBookmarks,
   BlogPostsComments,
   BlogComment,
   BlogCommentRes,
-  BookmarkRes,
+  BlogBookmarksRes,
 } from "../models/response.model";
 import { BlogPostCreation, BlogPostUpdate } from "../models/state.model";
 
@@ -30,6 +29,7 @@ export const blogPostApi = createApi({
     "BlogComments",
     "BlogComment",
     "Bookmarks",
+    "SearchedBlogPosts",
   ],
 
   endpoints: (builder) => ({
@@ -42,9 +42,18 @@ export const blogPostApi = createApi({
       providesTags: ["BlogPosts"],
     }),
 
+    getSearchedBlogPosts: builder.query<BlogPostsResponse, string>({
+      query: (queryStr) => ({
+        url: `/api/blog-posts/partial_name/${queryStr}`,
+        method: "GET",
+      }),
+      providesTags: ["SearchedBlogPosts"],
+    }),
+
     getBlogPostsByTag: builder.query<BlogPostsResponse, string>({
       query: (tag) => ({
         url: `/api/blog-posts?tag=${tag}`,
+        method: "GET",
       }),
       providesTags: ["BlogPostsByTag"],
     }),
@@ -107,7 +116,7 @@ export const blogPostApi = createApi({
     }),
 
     getBookmarksByPost: builder.query<
-      BlogPostBookmarks,
+      BlogBookmarksRes,
       string | number | undefined
     >({
       query: (post_id) => ({
@@ -117,7 +126,7 @@ export const blogPostApi = createApi({
       providesTags: ["Bookmarks"],
     }),
 
-    bookmarkPost: builder.mutation<BookmarkRes, string>({
+    bookmarkPost: builder.mutation<BlogBookmarksRes, string>({
       query: (post_id) => ({
         url: `/api/blog-posts/${post_id}/bookmarks`,
         method: "POST",
@@ -125,7 +134,7 @@ export const blogPostApi = createApi({
       invalidatesTags: ["BlogPost", "Bookmarks"],
     }),
 
-    unBookmarkPost: builder.mutation<BookmarkRes, string>({
+    unBookmarkPost: builder.mutation<BlogBookmarksRes, string>({
       query: (post_id) => ({
         url: `/api/blog-posts/${post_id}/bookmarks`,
         method: "DELETE",
@@ -182,4 +191,5 @@ export const {
   useBookmarkPostMutation,
   useUnBookmarkPostMutation,
   useGetBlogPostsByTagQuery,
+  useGetSearchedBlogPostsQuery,
 } = blogPostApi;

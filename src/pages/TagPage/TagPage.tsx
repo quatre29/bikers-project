@@ -14,7 +14,6 @@ const TagPage: React.FC = () => {
   const { tag } = useParams();
 
   const { data, isLoading } = useGetBlogPostsByTagQuery(tag!);
-  console.log(data);
   if (data?.data.posts.length === 0) return <div>No tag</div>;
 
   return (

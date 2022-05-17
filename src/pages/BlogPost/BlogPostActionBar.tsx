@@ -123,10 +123,8 @@ const BlogPostActionBar: React.FC<Props> = ({
   };
 
   const pinPost = () => {
-    console.log("Post pinned");
     pinPostQuery({ post_id: postId, body: { pinned: !pinned } }).then(
       (data: any) => {
-        console.log(isPinningSuccess);
         if (data.data?.status === "success") {
           toast(`Blog post successfully ${!pinned ? "pinned" : "unpinned"}`, {
             type: "success",
@@ -140,7 +138,6 @@ const BlogPostActionBar: React.FC<Props> = ({
   };
 
   const deletePost = () => {
-    console.log("DeLETE");
     deleteBlogPost(postId);
     setDeleteModal(false);
   };
