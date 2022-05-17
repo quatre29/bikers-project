@@ -1,3 +1,4 @@
+import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme: any) => ({
@@ -26,6 +27,13 @@ const useStyles = makeStyles((theme: any) => ({
   },
   description: {
     marginTop: theme.spacing(2),
+  },
+  userLink: {
+    textDecoration: "none",
+    color: grey[800],
+    "&:hover": {
+      color: grey[900],
+    },
   },
 }));
 

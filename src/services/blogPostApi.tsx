@@ -24,6 +24,7 @@ export const blogPostApi = createApi({
   }),
   tagTypes: [
     "BlogPosts",
+    "BlogPostsByTag",
     "BlogPost",
     "BlogPostRating",
     "BlogComments",
@@ -39,6 +40,13 @@ export const blogPostApi = createApi({
         method: "GET",
       }),
       providesTags: ["BlogPosts"],
+    }),
+
+    getBlogPostsByTag: builder.query<BlogPostsResponse, string>({
+      query: (tag) => ({
+        url: `/api/blog-posts?tag=${tag}`,
+      }),
+      providesTags: ["BlogPostsByTag"],
     }),
 
     //TODO: pagination query
@@ -173,4 +181,5 @@ export const {
   useUpdateBlogPostMutation,
   useBookmarkPostMutation,
   useUnBookmarkPostMutation,
+  useGetBlogPostsByTagQuery,
 } = blogPostApi;

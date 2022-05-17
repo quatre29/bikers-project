@@ -1,5 +1,10 @@
 import React, { createContext, useState, useMemo, useContext } from "react";
-import { createTheme, ThemeProvider, PaletteMode } from "@mui/material";
+import {
+  createTheme,
+  ThemeProvider,
+  PaletteMode,
+  responsiveFontSizes,
+} from "@mui/material";
 import { grey, blueGrey, indigo } from "@mui/material/colors";
 
 type ColorMode = "dark" | "light";
@@ -28,7 +33,7 @@ export const ColorModeContextProvider: React.FC<ContextChildrenProps> = ({
     [mode]
   );
 
-  const theme = useMemo(
+  let theme = useMemo(
     () =>
       createTheme({
         breakpoints: {
@@ -63,6 +68,8 @@ export const ColorModeContextProvider: React.FC<ContextChildrenProps> = ({
       }),
     [mode]
   );
+
+  theme = responsiveFontSizes(theme);
 
   return (
     <ColorModeContext.Provider value={colorMode}>

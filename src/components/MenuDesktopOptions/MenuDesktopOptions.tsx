@@ -13,7 +13,7 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import UserAvatar from "../UserAvatar";
 import { useNavigate } from "react-router-dom";
 import Logout from "@mui/icons-material/Logout";
-import Settings from "@mui/icons-material/Settings";
+import { Settings, DashboardRounded } from "@mui/icons-material";
 import { useLogoutMutation } from "../../services/authApi";
 import LogoutMenuItem from "./LogoutMenuItem";
 
@@ -38,6 +38,11 @@ const MenuDesktopOptions: React.FC = () => {
   const handleCloseUserMenuGoSettings = () => {
     setAnchorEl(null);
     navigate("/settings");
+  };
+
+  const handleCloseUserMenuGoDashboard = () => {
+    setAnchorEl(null);
+    navigate("/dashboard");
   };
 
   return (
@@ -92,6 +97,14 @@ const MenuDesktopOptions: React.FC = () => {
         <MenuItem onClick={handleCloseUserMenuGoProfile}>
           <Avatar />
           My Profile
+        </MenuItem>
+        <Divider />
+
+        <MenuItem onClick={handleCloseUserMenuGoDashboard}>
+          <ListItemIcon>
+            <DashboardRounded fontSize="small" />
+          </ListItemIcon>
+          Dashboard
         </MenuItem>
 
         <Divider />

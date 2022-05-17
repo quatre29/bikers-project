@@ -13,7 +13,11 @@ import { useParams } from "react-router-dom";
 import LoadingSpinner from "../LoadingSpinner";
 import { toast } from "react-toastify";
 
-const CommentSection: React.FC = () => {
+interface Props {
+  userId: string;
+}
+
+const CommentSection: React.FC<Props> = ({ userId }) => {
   const classes = useStyles();
   const { id } = useParams();
   const { data, isLoading } = useGetBlogPostCommentsQuery(id!);
@@ -77,6 +81,7 @@ const CommentSection: React.FC = () => {
               comment={comment}
               deleteComment={deleteComment}
               postId={id!}
+              userId={userId}
             />
           ))
         )}

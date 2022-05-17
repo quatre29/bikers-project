@@ -15,6 +15,12 @@ const useStyles = makeStyles((theme: any) => ({
       cursor: "pointer",
     },
   },
+
+  tagLink: {
+    textDecoration: "none",
+    color: "inherit",
+  },
+
   tagText: {
     "&:hover": {
       color: grey[900],

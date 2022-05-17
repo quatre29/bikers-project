@@ -1,3 +1,4 @@
+import { blueGrey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme: any) => ({
@@ -27,6 +28,12 @@ const useStyles = makeStyles((theme: any) => ({
     marginRight: theme.spacing(1),
     fontWeight: "bold",
     color: theme.palette.text.secondary,
+    "&:hover": {
+      color: blueGrey[700],
+    },
+  },
+  userLink: {
+    textDecoration: "none",
   },
   date: {
     marginLeft: theme.spacing(1),

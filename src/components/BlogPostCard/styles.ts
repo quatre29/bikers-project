@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme: any) => ({
       color: theme.palette.primary.main,
     },
   },
+  userLink: {
+    textDecoration: "none",
+  },
 }));
 
 export default useStyles;

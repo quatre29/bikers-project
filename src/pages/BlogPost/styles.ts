@@ -42,8 +42,17 @@ const useStyles = makeStyles((theme: any) => ({
   tagItem: {
     marginRight: theme.spacing(1),
   },
+
   postText: {
     marginTop: theme.spacing(4),
+  },
+
+  userLink: {
+    textDecoration: "none",
+    color: grey[800],
+    "&:hover": {
+      color: grey[900],
+    },
   },
 
   //--------------action bar-------------------

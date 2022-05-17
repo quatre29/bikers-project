@@ -23,14 +23,21 @@ import ModalConfirmation from "../ModalConfirmation";
 import CommentTextEditor from "../CommentTextEditor";
 import { useUpdateBlogCommentMutation } from "../../services/blogCommentsApi";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 interface Props {
   comment: BlogCommentInterface;
   deleteComment: (comment_id: string) => void;
   postId: string;
+  userId: string;
 }
 
-const BlogComment: React.FC<Props> = ({ comment, deleteComment, postId }) => {
+const BlogComment: React.FC<Props> = ({
+  comment,
+  deleteComment,
+  postId,
+  userId,
+}) => {
   const classes = useStyles();
   const [anchorMenu, setAnchorMenu] = useState<null | HTMLElement>(null);
   const [deleteCommentModal, setDeleteCommentModal] = useState(false);
@@ -118,9 +125,11 @@ const BlogComment: React.FC<Props> = ({ comment, deleteComment, postId }) => {
         <Grid item xs={11}>
           <Grid container className={classes.commentContainer}>
             <Grid item xs={6} className={classes.userDetails}>
-              <Typography variant="body2" className={classes.username}>
-                {author}
-              </Typography>
+              <Link className={classes.userLink} to={`/user-profile/${userId}`}>
+                <Typography variant="body2" className={classes.username}>
+                  {author}
+                </Typography>
+              </Link>
               •
               <Typography variant="body2" className={classes.date}>
                 {moment(created_at)}

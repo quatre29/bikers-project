@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 import CustomPaper from "../CustomPaper";
 import UserAvatar from "../UserAvatar";
 import useStyles from "./styles";
+import { Link } from "react-router-dom";
 
 interface Props {
   user: {
@@ -12,6 +13,7 @@ interface Props {
     name: string | undefined;
     role: string | undefined;
     description: string | null | undefined;
+    user_id: string;
   };
 }
 
@@ -22,9 +24,14 @@ const UserInfoCard: React.FC<Props> = ({ user }) => {
       <CustomPaper>
         <Box className={classes.avatarContainer}>
           <UserAvatar image={user.avatar} size={{ width: 100, height: 100 }} />
-          <Typography variant="h5" className={classes.name}>
-            {user.name}
-          </Typography>
+          <Link
+            className={classes.userLink}
+            to={`/user-profile/${user.user_id}`}
+          >
+            <Typography variant="h5" className={classes.name}>
+              {user.name}
+            </Typography>
+          </Link>
           <Typography
             variant="body1"
             className={classes.username}

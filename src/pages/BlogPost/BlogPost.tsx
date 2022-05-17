@@ -16,6 +16,8 @@ import BlogPostActionBar from "./BlogPostActionBar";
 import CommentSection from "../../components/CommentSection";
 import BlogDescriptionCard from "./BlogDescriptionCard";
 import RoleBadge from "../../components/RoleBadge";
+import { Link } from "react-router-dom";
+import GoToTop from "../../utils/GoToTop";
 
 const BlogPost: React.FC = () => {
   const classes = useStyles();
@@ -63,12 +65,17 @@ const BlogPost: React.FC = () => {
                     <Box className={classes.postDetails}>
                       <Box className={classes.postDetailsCreator}>
                         <UserAvatar image={post?.author_avatar} />
-                        <Typography
-                          sx={(theme) => ({ marginLeft: theme.spacing(2) })}
-                          variant="body1"
+                        <Link
+                          className={classes.userLink}
+                          to={`/user-profile/${post?.author_id}`}
                         >
-                          {post?.author}
-                        </Typography>
+                          <Typography
+                            sx={(theme) => ({ marginLeft: theme.spacing(2) })}
+                            variant="body1"
+                          >
+                            {post?.author}
+                          </Typography>
+                        </Link>
                       </Box>
                       <Typography variant="body2" color="text.secondary">
                         {moment(post?.created_at!)}
@@ -89,7 +96,7 @@ const BlogPost: React.FC = () => {
                       <Typography variant="h5" className={classes.sectionTitle}>
                         Discussions
                       </Typography>
-                      <CommentSection />
+                      <CommentSection userId={post?.author_id!} />
                     </Box>
                   </CustomPaper>
                 )}
@@ -106,6 +113,7 @@ const BlogPost: React.FC = () => {
                         name: post?.author_name,
                         role: post?.author_role,
                         description: post?.author_description,
+                        user_id: post?.author_id!,
                       }}
                     />
                   </Grid>
@@ -127,6 +135,7 @@ const BlogPost: React.FC = () => {
           </Grid>
         </Grid>
       )}
+      <GoToTop />
     </Container>
   );
 };

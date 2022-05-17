@@ -32,6 +32,7 @@ export interface BlogPost {
   author_name: string;
   author_role: "member" | "moderator" | "admin" | "developer" | "blogger";
   author_location: string | null;
+  author_id: string;
   author_description: string | null;
   bookmarked: boolean;
 }

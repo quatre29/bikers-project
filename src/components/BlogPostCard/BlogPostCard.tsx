@@ -29,9 +29,14 @@ const BlogPostCard: React.FC<BlogPostCardInterface> = ({ data }) => {
           <UserAvatar image={data.author_avatar} />
         </Grid>
         <Grid xs={11} item className={classes.body}>
-          <Typography variant="body1" className={classes.user}>
-            {data.author}
-          </Typography>
+          <Link
+            className={classes.userLink}
+            to={`/user-profile/${data.author_id}`}
+          >
+            <Typography variant="body1" className={classes.user}>
+              {data.author}
+            </Typography>
+          </Link>
           <Typography variant="body2" color="text.secondary">
             {moment(data.created_at)}
           </Typography>

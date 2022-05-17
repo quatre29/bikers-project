@@ -12,8 +12,6 @@ const UserProfile: React.FC = () => {
 
   const { data, isLoading: isGetUserLoading } = useGetUserByIdQuery(user_id!);
 
-  console.log(user_id, data, "000", user);
-
   const userProfile = data?.data.user;
 
   useEffect(() => {
@@ -38,7 +36,5 @@ const UserProfile: React.FC = () => {
     </>
   );
 };
-{
-  /* <UserProfileContent /> */
-}
+
 export default UserProfile;
