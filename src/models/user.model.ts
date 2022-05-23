@@ -10,3 +10,11 @@ export interface User {
   description?: string;
   created_at?: Date;
 }
+
+export interface UserEdit {
+  avatar: string;
+  name: string;
+  location: string | null;
+  description: string | null;
+  email: string;
+}

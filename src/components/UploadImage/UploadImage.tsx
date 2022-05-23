@@ -1,9 +1,13 @@
 import React, { SetStateAction } from "react";
 import { Button } from "@mui/material";
 import { BlogPostCreation } from "../../models/state.model";
+import { UserEdit } from "../../models/user.model";
 
 interface Props {
-  setImageState: React.Dispatch<SetStateAction<BlogPostCreation>>;
+  setImageState:
+    | React.Dispatch<SetStateAction<BlogPostCreation>>
+    | React.Dispatch<SetStateAction<UserEdit>>;
+  // setAvatarImageState: React.Dispatch<SetStateAction<UserEdit>>;
   type: "post_banner" | "avatar";
 }
 
@@ -20,6 +24,7 @@ const UploadImage: React.FC<Props> = ({ setImageState, type }) => {
     reader.readAsDataURL(file);
 
     reader.onloadend = () => {
+      // @ts-ignore: Parameter 'prevState' implicitly has an 'any'
       setImageState((prevState) => ({
         ...prevState,
         [type]: reader.result,

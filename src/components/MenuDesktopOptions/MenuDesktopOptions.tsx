@@ -16,11 +16,13 @@ import Logout from "@mui/icons-material/Logout";
 import { Settings, DashboardRounded } from "@mui/icons-material";
 import { useLogoutMutation } from "../../services/authApi";
 import LogoutMenuItem from "./LogoutMenuItem";
+import { useAuth } from "../../hooks/useAuth";
 
 const MenuDesktopOptions: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const navigate = useNavigate();
+  const user = useAuth();
 
   const handleCloseUserMenu = () => {
     setAnchorEl(null);
@@ -49,7 +51,7 @@ const MenuDesktopOptions: React.FC = () => {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open Menu">
         <IconButton onClick={handleOpenUserMenu}>
-          <UserAvatar online />
+          <UserAvatar online image={user.user?.avatar} />
         </IconButton>
       </Tooltip>
       <Menu

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { UserLogin, UserRegister } from "../models/auth.model";
 import { UserResponse } from "../models/response.model";
-import { User } from "../models/user.model";
+import { User, UserEdit } from "../models/user.model";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -12,7 +12,7 @@ export const authApi = createApi({
     },
     credentials: "include",
   }),
-  tagTypes: ["Authentication"],
+  tagTypes: ["Authentication", "Me"],
 
   endpoints: (builder) => ({
     register: builder.mutation<UserResponse, UserRegister>({
@@ -45,6 +45,16 @@ export const authApi = createApi({
         url: `/api/users/me`,
         method: "GET",
       }),
+      providesTags: ["Me"],
+    }),
+
+    updateMe: builder.mutation<UserResponse, UserEdit>({
+      query: (body) => ({
+        url: "/api/users/update_me",
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: ["Me"],
     }),
   }),
 });
@@ -54,4 +64,5 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
+  useUpdateMeMutation,
 } = authApi;

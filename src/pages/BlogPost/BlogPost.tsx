@@ -102,7 +102,10 @@ const BlogPost: React.FC = () => {
                       <Typography variant="h5" className={classes.sectionTitle}>
                         Discussions
                       </Typography>
-                      <CommentSection userId={post?.author_id!} />
+                      <CommentSection
+                        userAvatar={post?.author_avatar!}
+                        userId={post?.author_id!}
+                      />
                     </Box>
                   </CustomPaper>
                 )}

@@ -15,9 +15,10 @@ import { toast } from "react-toastify";
 
 interface Props {
   userId: string;
+  userAvatar: string;
 }
 
-const CommentSection: React.FC<Props> = ({ userId }) => {
+const CommentSection: React.FC<Props> = ({ userId, userAvatar }) => {
   const classes = useStyles();
   const { id } = useParams();
   const { data, isLoading } = useGetBlogPostCommentsQuery(id!);
@@ -64,7 +65,7 @@ const CommentSection: React.FC<Props> = ({ userId }) => {
     <Box>
       <Grid container className={classes.container}>
         <Grid item xs={1}>
-          <UserAvatar size={{ width: 25, height: 25 }} />
+          <UserAvatar size={{ width: 25, height: 25 }} image={userAvatar} />
         </Grid>
         <Grid item xs={11}>
           <CommentTextEditor saveBodyData={sendComment} isLoading={false} />
