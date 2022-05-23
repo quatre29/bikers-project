@@ -15,6 +15,8 @@ import { Link } from "react-router-dom";
 import { BlogPost } from "../../models/response.model";
 import moment from "../../utils/momentDate";
 import TagItem from "../TagItem";
+import BlogPostBanner from "../../pages/BlogPost/BlogPostBanner";
+import BannerPost from "./BannerPost";
 
 interface BlogPostCardInterface {
   data: BlogPost;
@@ -22,6 +24,7 @@ interface BlogPostCardInterface {
 
 const BlogPostCard: React.FC<BlogPostCardInterface> = ({ data }) => {
   const classes = useStyles();
+
   return (
     <Card variant="outlined" className={classes.container}>
       <Grid container>
@@ -59,11 +62,25 @@ const BlogPostCard: React.FC<BlogPostCardInterface> = ({ data }) => {
         </Grid>
       </Grid>
 
-      <CardMedia
+      {/* <CardMedia
         component="img"
         sx={{ width: 151, borderRadius: "5px" }}
-        image={data.post_banner}
-      />
+        // @ts-ignore
+        image={bannerImg}
+      /> */}
+      <Box
+        sx={{
+          height: 200,
+          width: 151,
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: "3px",
+        }}
+      >
+        <BannerPost publicId={data.post_banner} />
+      </Box>
     </Card>
   );
 };

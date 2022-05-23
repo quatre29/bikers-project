@@ -15,7 +15,7 @@ const BlogPostMinimalCard: React.FC<Props> = ({ post }) => {
   return (
     <Grid container className={classes.container}>
       <Grid item xs={2} sm={1}>
-        <UserAvatar />
+        <UserAvatar image={post.author_avatar} />
       </Grid>
       <Grid item xs={10} sm={11}>
         <Link to={`/blog-post/${post.post_id}`} className={classes.titleLink}>

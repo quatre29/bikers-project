@@ -93,6 +93,7 @@ export interface Bookmark {
   title?: string;
   author?: string;
   author_name: string;
+  author_avatar: string;
   created_at?: string;
   tags?: string[];
 }

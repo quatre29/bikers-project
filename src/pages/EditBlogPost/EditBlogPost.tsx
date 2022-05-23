@@ -24,6 +24,7 @@ const EditBlogPost: React.FC = () => {
         body={blogPost.body}
         description={blogPost.description}
         tags={blogPost.tags}
+        post_banner={blogPost.post_banner}
         edit
         editPostId={post_id}
       />

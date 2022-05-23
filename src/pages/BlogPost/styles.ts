@@ -11,10 +11,16 @@ const useStyles = makeStyles((theme: any) => ({
   banner: {
     width: "100%",
     height: "300px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    // flexDirection: "column",
+
+    // objectFit: "cover",
     borderRadius: theme.shape.borderRadius,
-    objectFit: "cover",
+    overflow: "hidden",
     // border: theme.palette.mode === "light" && `1px solid ${deepPurple[200]}`,
-    border: theme.palette.mode === "light" ? `1px solid ${grey[400]}` : "none",
+    // border: theme.palette.mode === "light" ? `1px solid ${grey[400]}` : "none",
   },
   title: {
     fontWeight: "bold",

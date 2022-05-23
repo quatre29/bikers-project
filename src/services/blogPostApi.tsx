@@ -126,6 +126,14 @@ export const blogPostApi = createApi({
       providesTags: ["Bookmarks"],
     }),
 
+    getMyBookmarks: builder.query<BlogBookmarksRes, void>({
+      query: () => ({
+        url: "/api/users/my_bookmarks",
+        method: "GET",
+      }),
+      providesTags: ["Bookmarks"],
+    }),
+
     bookmarkPost: builder.mutation<BlogBookmarksRes, string>({
       query: (post_id) => ({
         url: `/api/blog-posts/${post_id}/bookmarks`,
@@ -192,4 +200,5 @@ export const {
   useUnBookmarkPostMutation,
   useGetBlogPostsByTagQuery,
   useGetSearchedBlogPostsQuery,
+  useGetMyBookmarksQuery,
 } = blogPostApi;

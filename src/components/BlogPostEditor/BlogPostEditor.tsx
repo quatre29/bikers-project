@@ -12,12 +12,15 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import CKTextEditor from "../../components/TextEditor/CKTextEditor";
 import AddTag from "./AddTag";
+import UploadImage from "../UploadImage";
+import Image from "material-ui-image";
 
 interface Props {
   title?: string;
   body?: string;
   description?: string;
   tags?: string[];
+  post_banner?: string;
   edit?: boolean;
   editPostId?: string;
 }
@@ -27,6 +30,7 @@ const BlogPostEditor: React.FC<Props> = ({
   body = "",
   description = "",
   tags = [],
+  post_banner = "",
   edit,
   editPostId,
 }) => {
@@ -36,8 +40,9 @@ const BlogPostEditor: React.FC<Props> = ({
     body,
     description,
     tags,
-    // post_banner: "",
+    post_banner,
   });
+
   const [postSent, setPostSent] = useState(false);
   const navigate = useNavigate();
 
@@ -64,7 +69,6 @@ const BlogPostEditor: React.FC<Props> = ({
   }, [isUpdateError, isUpdateSuccess]);
 
   useEffect(() => {
-    // console.log(createPostState, "===========");
     if (postSent && createPostState.body.length > 0 && !edit) {
       createPost(createPostState)
         .then((data: any) => {
@@ -121,6 +125,34 @@ const BlogPostEditor: React.FC<Props> = ({
     <Container maxWidth="md" className={classes.container}>
       <CustomPaper>
         <Grid container spacing={4}>
+          <Grid item xs={12}>
+            <Image
+              style={{
+                marginTop: "15px",
+                paddingTop: "0px",
+                margin: "0px auto",
+              }}
+              imageStyle={{
+                height: "150px",
+                width: "300px",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                position: "relative",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: "5px",
+                flexDirection: "column",
+              }}
+              src={createPostState.post_banner!}
+              disableSpinner={true}
+            />
+            <UploadImage
+              setImageState={setCreatePostState}
+              type="post_banner"
+            />
+          </Grid>
           <Grid item xs={12}>
             <Typography
               variant="h1"

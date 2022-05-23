@@ -33,19 +33,7 @@ export const userApi = createApi({
       }),
       providesTags: ["SearchedUsers"],
     }),
-
-    getMyBookmarks: builder.query<BlogBookmarksRes, void>({
-      query: () => ({
-        url: "/api/users/my_bookmarks",
-        method: "GET",
-      }),
-      providesTags: ["MyBookmarks"],
-    }),
   }),
 });
 
-export const {
-  useGetUserByIdQuery,
-  useGetUsersBySearchQuery,
-  useGetMyBookmarksQuery,
-} = userApi;
+export const { useGetUserByIdQuery, useGetUsersBySearchQuery } = userApi;

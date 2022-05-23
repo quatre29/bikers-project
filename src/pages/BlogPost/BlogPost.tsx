@@ -18,6 +18,7 @@ import BlogDescriptionCard from "./BlogDescriptionCard";
 import RoleBadge from "../../components/RoleBadge";
 import { Link } from "react-router-dom";
 import GoToTop from "../../utils/GoToTop";
+import BlogPostBanner from "./BlogPostBanner";
 
 const BlogPost: React.FC = () => {
   const classes = useStyles();
@@ -58,10 +59,15 @@ const BlogPost: React.FC = () => {
                     <Typography variant="h4" className={classes.title}>
                       {post?.title}
                     </Typography>
-                    {post?.post_banner && (
+                    {/* {post?.post_banner && (
                       <img src={post?.post_banner} className={classes.banner} />
-                    )}
+                    )} */}
 
+                    {post?.post_banner && (
+                      <Box className={classes.banner}>
+                        <BlogPostBanner publicId={post.post_banner} />
+                      </Box>
+                    )}
                     <Box className={classes.postDetails}>
                       <Box className={classes.postDetailsCreator}>
                         <UserAvatar image={post?.author_avatar} />
