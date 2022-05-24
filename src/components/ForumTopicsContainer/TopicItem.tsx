@@ -6,36 +6,37 @@ import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
 import { Link } from "react-router-dom";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import StarIcon from "@mui/icons-material/Star";
+import { Topic } from "../../models/forumTopics.model";
 
 interface Props {
-  pinned?: boolean;
+  topic: Topic;
 }
 
-const TopicItem: React.FC<Props> = ({ pinned }) => {
+const TopicItem: React.FC<Props> = ({ topic }) => {
   const classes = useStyles();
   return (
     <Box className={classes.container}>
       <Divider className={classes.divider} />
       <Grid container sx={(theme) => ({ marginTop: theme.spacing(2) })}>
         <Grid item xs={1} className={classes.textContainer}>
-          {pinned && <PushPinRoundedIcon />}
+          {topic.pinned && <PushPinRoundedIcon />}
         </Grid>
         <Grid item xs={4} className={classes.titleTextContainer}>
           <Link
-            to='/forum/category/announcements/245454'
+            to={`/forum/topic/${topic.topic_id}`}
             className={classes.titleLink}
           >
-            <Typography variant='body1'>This is a title</Typography>
+            <Typography variant="body1">{topic.title}</Typography>
           </Link>
         </Grid>
         <Grid item xs={1} className={classes.textContainer}>
-          32
+          {topic.replies_count}
         </Grid>
         <Grid item xs={1} className={classes.textContainer}>
-          4.5 / 5
+          {topic.votes_count}
         </Grid>
         <Grid item xs={2} className={classes.textContainer}>
-          Moderator
+          {topic.author}
         </Grid>
         <Grid item xs={3} className={classes.textContainer}>
           <ForumTopicItem />

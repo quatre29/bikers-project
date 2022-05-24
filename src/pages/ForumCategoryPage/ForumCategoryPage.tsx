@@ -1,30 +1,26 @@
 import React from "react";
 import { Container, Box } from "@mui/material";
 import ForumCategoryCard from "../../components/ForumCategoryCard";
+import {
+  useGetForumCategoryByIdQuery,
+  useGetForumsByCategoryIdQuery,
+} from "../../services/forumsApi";
+import { useParams } from "react-router-dom";
 
 const ForumCategoryPage: React.FC = () => {
+  const { category_id } = useParams();
+  const { data, isLoading, isError } = useGetForumCategoryByIdQuery(
+    category_id!
+  );
+
   return (
-    <>
-      <Box
-        sx={{
-          zIndex: "-100",
-          position: "absolute",
-          height: "500px",
-          width: "100%",
-          background:
-            "url(https://images.unsplash.com/photo-1533282960533-51328aa49826?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2142&q=80)",
-          // background: `linear-gradient(0deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(https://images.unsplash.com/photo-1640804243601-3f47ffed52a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80)`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          filter: "grayscale(100%)",
-        }}
-      ></Box>
-      <Container maxWidth='lg'>
-        <Box sx={(theme) => ({ marginTop: theme.spacing(8) })}>
-          <ForumCategoryCard />
-        </Box>
-      </Container>
-    </>
+    <Container maxWidth="lg">
+      <Box sx={(theme) => ({ marginTop: theme.spacing(8) })}>
+        {data && !isLoading && (
+          <ForumCategoryCard category={data.data.category} />
+        )}
+      </Box>
+    </Container>
   );
 };
 

@@ -11,10 +11,10 @@ const ForumTopicItem: React.FC = () => {
         <UserAvatar />
       </Grid>
       <Grid item className={classes.textContainer}>
-        <Typography className={classes.usernameText} variant='body1'>
+        <Typography className={classes.usernameText} variant="body1">
           Moderator
         </Typography>
-        <Typography variant='body2' color='text.secondary'>
+        <Typography variant="body2" color="text.secondary">
           a few seconds ago
         </Typography>
       </Grid>

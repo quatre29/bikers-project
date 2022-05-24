@@ -8,25 +8,34 @@ import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
 import LightbulbRoundedIcon from "@mui/icons-material/LightbulbRounded";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
 import DynamicFeedRoundedIcon from "@mui/icons-material/DynamicFeedRounded";
-import { ForumCategory } from "../../models/forumResponse.model";
-import { useGetForumsByCategoryIdQuery } from "../../services/forumsApi";
+import { Forum, ForumCategory } from "../../models/forumResponse.model";
+import {
+  useGetForumsByCategoryIdQuery,
+  useGetSubForumsByForumIdQuery,
+} from "../../services/forumsApi";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
 
 interface Props {
   subForumContainer?: boolean;
-  category: ForumCategory;
+  forumId: string;
+  categoryId: string;
+  forumName: string;
+  categoryName: string;
+  parentForumId: string | null;
+  parentForumName: string | null;
 }
 
-const ForumCategoryCard: React.FC<Props> = ({
+const SubForumsCard: React.FC<Props> = ({
   subForumContainer,
-  category,
+  forumId,
+  categoryId,
+  categoryName,
+  forumName,
+  parentForumId,
+  parentForumName,
 }) => {
-  const { category_id } = useParams();
   const classes = useStyles();
-  const { data, isLoading, isError } = useGetForumsByCategoryIdQuery(
-    category.category_id
-  );
+  const { data, isLoading, isError } = useGetSubForumsByForumIdQuery(forumId);
 
   useEffect(() => {
     if (isError) {
@@ -44,34 +53,56 @@ const ForumCategoryCard: React.FC<Props> = ({
                 fontSize="small"
                 className={classes.forumTextIcon}
               />
-              {category_id && (
-                <>
-                  <Link to={`/forum`} className={classes.textLink}>
-                    <Typography variant="body2" className={classes.forumText}>
-                      Forum
-                    </Typography>
-                  </Link>
-                  <Typography variant="body2" className={classes.linkSeparator}>
-                    {">"}
+              <Link to="/forum" className={classes.textLink}>
+                <Typography variant="body2" className={classes.forumText}>
+                  Forum
+                </Typography>
+              </Link>
+              <Typography variant="body2" className={classes.linkSeparator}>
+                {">"}
+              </Typography>
+              <Link
+                to={`/forum/category/${categoryId}`}
+                className={classes.textLink}
+              >
+                <Typography variant="body2" className={classes.forumText}>
+                  {categoryName}
+                </Typography>
+              </Link>
+              <Typography variant="body2" className={classes.linkSeparator}>
+                {">"}
+              </Typography>
+
+              {parentForumId ? (
+                <Link
+                  to={`/forum/${parentForumId}`}
+                  className={classes.textLink}
+                >
+                  <Typography variant="body2" className={classes.forumText}>
+                    {parentForumName}
                   </Typography>
-                </>
-              )}
-              {category_id ? (
+                </Link>
+              ) : (
                 <Typography
                   variant="body2"
                   className={classes.forumTextDisabled}
                 >
-                  {category.name}
+                  {forumName}
                 </Typography>
-              ) : (
-                <Link
-                  to={`/forum/category/${category.category_id}`}
-                  className={classes.textLink}
-                >
-                  <Typography variant="body2" className={classes.forumText}>
-                    {category.name}
+              )}
+
+              {parentForumId && (
+                <>
+                  <Typography variant="body2" className={classes.linkSeparator}>
+                    {">"}
                   </Typography>
-                </Link>
+                  <Typography
+                    variant="body2"
+                    className={classes.forumTextDisabled}
+                  >
+                    {forumName}
+                  </Typography>
+                </>
               )}
             </Grid>
             <Grid item xs={1} className={classes.forumItem}>
@@ -120,4 +151,4 @@ const ForumCategoryCard: React.FC<Props> = ({
   );
 };
 
-export default ForumCategoryCard;
+export default SubForumsCard;

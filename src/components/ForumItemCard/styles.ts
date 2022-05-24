@@ -52,7 +52,6 @@ const useStyles = makeStyles((theme: any) => ({
     "&:hover": {
       color: theme.palette.primary.main,
       cursor: "pointer",
-      fontWeight: "bold",
     },
   },
   divider: {

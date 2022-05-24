@@ -25,6 +25,7 @@ import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import UnderConstruction from "./pages/UnderConstruction";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import ForumPageLayout from "./pages/ForumPageLayout/ForumPageLayout";
 
 const App: React.FC = () => {
   return (
@@ -47,18 +48,20 @@ const App: React.FC = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/tag/:tag" element={<TagPage />} />
           </Route>
-          <Route path="/forum" element={<ForumHomePage />} />
+
+          <Route path="/forum" element={<ForumPageLayout />}>
+            <Route path="/forum" element={<ForumHomePage />} />
+            <Route
+              path="/forum/category/:category_id"
+              element={<ForumCategoryPage />}
+            />
+            <Route path="/forum/:forum_id" element={<ForumPage />} />
+            <Route path="/forum/topic/:topic_id" element={<ForumTopicPage />} />
+          </Route>
+
           <Route path="/new-blog" element={<CreateBlogPost />} />
           <Route path="/edit-blog/:post_id" element={<EditBlogPost />} />
-          <Route path="/forum/:category" element={<ForumCategoryPage />} />
-          <Route
-            path="/forum/:category_slug/:forum_slug"
-            element={<ForumPage />}
-          />
-          <Route
-            path="/forum/:category_slug/:forum_slug/:topic_id"
-            element={<ForumTopicPage />}
-          />
+
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/bookmarks" element={<UnderConstruction />} />
           <Route path="/events" element={<UnderConstruction />} />

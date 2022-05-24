@@ -2,19 +2,33 @@ import React from "react";
 import useStyles from "./styles";
 import { Grid, Box, Divider, Typography } from "@mui/material";
 import UserAvatar from "../../components/UserAvatar";
+import { Topic } from "../../models/forumTopics.model";
+import * as moment from "moment";
 
 interface Props {
-  topicPost?: boolean;
+  topicPost?: Topic;
+  date: string;
+  author: string;
+  role: string;
+  avatar: string;
+  body: string;
 }
 
-const ReplyTopic: React.FC<Props> = ({ topicPost }) => {
+const ReplyTopic: React.FC<Props> = ({
+  topicPost,
+  date,
+  author,
+  role,
+  avatar,
+  body,
+}) => {
   const classes = useStyles();
   return (
     <Box className={classes.replyContainer}>
       <Box>
         <Divider />
-        <Typography variant='body2' className={classes.replyDate}>
-          Match 11, 2022
+        <Typography variant="body2" className={classes.replyDate}>
+          {moment.parseZone(date).format("LL")}
         </Typography>
         <Divider />
       </Box>
@@ -23,21 +37,21 @@ const ReplyTopic: React.FC<Props> = ({ topicPost }) => {
           <Box className={classes.replyUserContainer}>
             <UserAvatar
               online
-              variant='rounded'
+              variant="rounded"
               size={{ width: 150, height: 200 }}
             />
             <Typography
-              variant='h6'
-              color='primary'
+              variant="h6"
+              color="primary"
               sx={(theme) => ({
                 fontWeight: "bold",
                 marginTop: theme.spacing(2),
               })}
             >
-              Username
+              {author}
             </Typography>
-            <Typography color='text.secondary' variant='body1'>
-              Moderator
+            <Typography color="text.secondary" variant="body1">
+              {role}
             </Typography>
           </Box>
         </Grid>
@@ -45,43 +59,22 @@ const ReplyTopic: React.FC<Props> = ({ topicPost }) => {
           {topicPost && (
             <Box className={classes.replyTitleContainer}>
               <Typography
-                color='primary'
-                variant='h6'
+                color="primary"
+                variant="h6"
                 sx={(theme) => ({ marginBottom: theme.spacing(1) })}
               >
-                This is a title
+                {topicPost.title}
               </Typography>
               <Divider />
             </Box>
           )}
-          <Typography variant='body1'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </Typography>
-          <Typography variant='body1'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </Typography>
+          <Typography variant="body1">{body}</Typography>
         </Grid>
       </Grid>
       <Box>
         <Divider />
 
-        <Typography className={classes.replyQuote} variant='body2'>
+        <Typography className={classes.replyQuote} variant="body2">
           Quote
         </Typography>
         <Divider />
