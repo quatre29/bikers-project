@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import useStyles from "./styles";
+import { LoadingButton } from "@mui/lab";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -61,10 +62,16 @@ const ModalConfirmation: React.FC<Props> = ({
         <Button variant="contained" color="error" onClick={handleClose}>
           Cancel
         </Button>
-        <Button variant="contained" color="primary" onClick={handleAgree}>
+
+        <LoadingButton
+          loading={loading}
+          loadingPosition="end"
+          variant="contained"
+          color="primary"
+          onClick={handleAgree}
+        >
           Continue
-        </Button>
-        {loading && <CircularProgress size={30} />}
+        </LoadingButton>
       </DialogActions>
     </Dialog>
   );

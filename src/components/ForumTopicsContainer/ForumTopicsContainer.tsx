@@ -22,7 +22,6 @@ const ForumTopicsContainer: React.FC = () => {
     isError: isTopicsError,
   } = useGetTopicsByForumIdQuery(forum_id!);
 
-  console.log(topicsData);
   useEffect(() => {
     if (isError || isTopicsError) {
       toast("Something went wrong, please check your connection", {

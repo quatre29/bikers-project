@@ -10,7 +10,29 @@ const useStyles = makeStyles((theme: any) => ({
     alignItems: "center",
     justifyContent: "right",
   },
+  linkAddressContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
 
+  linkSeparator: {
+    margin: theme.spacing(0, 1, 0, 1),
+  },
+
+  forumText: {
+    fontWeight: "bold",
+  },
+  textLink: {
+    textDecoration: "none",
+    color: "inherit",
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
+  forumTextDisabled: {
+    fontWeight: "bold",
+    color: grey[500],
+  },
   //--------------------------------------------
   replyContainer: {
     // padding: theme.spacing(2, 0, 2, 0),
@@ -44,6 +66,29 @@ const useStyles = makeStyles((theme: any) => ({
   },
   replyTitleContainer: {
     marginBottom: theme.spacing(3),
+    width: "100%",
+  },
+
+  textEditorContainer: {
+    // width: "100%",
+    // border: "1px solid blue",
+    marginTop: theme.spacing(2),
+  },
+  replyHeaderContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  editMenuContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "flex-end",
+    width: "100%",
+  },
+
+  titleDivider: {
+    marginBottom: theme.spacing(2),
   },
 }));
 
