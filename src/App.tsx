@@ -26,6 +26,7 @@ import Dashboard from "./pages/Dashboard";
 import UnderConstruction from "./pages/UnderConstruction";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import ForumPageLayout from "./pages/ForumPageLayout/ForumPageLayout";
+import CreateNewTopic from "./pages/CreateNewTopic";
 
 const App: React.FC = () => {
   return (
@@ -57,6 +58,7 @@ const App: React.FC = () => {
             />
             <Route path="/forum/:forum_id" element={<ForumPage />} />
             <Route path="/forum/topic/:topic_id" element={<ForumTopicPage />} />
+            <Route path="/forum/new-topic" element={<CreateNewTopic />} />
           </Route>
 
           <Route path="/new-blog" element={<CreateBlogPost />} />

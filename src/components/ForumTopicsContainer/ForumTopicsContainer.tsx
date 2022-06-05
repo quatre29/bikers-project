@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CustomPaper from "../CustomPaper";
 import useStyles from "./styles";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, Button } from "@mui/material";
 import ForumCategoryCard from "../ForumCategoryCard";
 import TopicItem from "./TopicItem";
 import SubForumsCard from "../ForumCategoryCard/SubForumsCard";
@@ -10,6 +10,8 @@ import { useGetForumByIdQuery } from "../../services/forumsApi";
 import { toast } from "react-toastify";
 import { DataArray } from "@mui/icons-material";
 import { useGetTopicsByForumIdQuery } from "../../services/forumTopicsApi";
+import ForumModalCreation from "../ForumModalCreation";
+import { Link } from "react-router-dom";
 
 const ForumTopicsContainer: React.FC = () => {
   const classes = useStyles();
@@ -56,7 +58,7 @@ const ForumTopicsContainer: React.FC = () => {
                 >
                   <Grid item xs={5}>
                     <Typography variant="body2" className={classes.text}>
-                      Topic Title
+                      {data?.data.forum.name}
                     </Typography>
                   </Grid>
                   <Grid item xs={1} className={classes.textContainer}>
@@ -80,6 +82,25 @@ const ForumTopicsContainer: React.FC = () => {
                     </Typography>
                   </Grid>
                 </Grid>
+                <Link
+                  to="/forum/new-topic"
+                  state={{
+                    forumId: forum_id,
+                    forumName: data?.data.forum.name,
+                    categoryId: data?.data.forum.category_id,
+                    categoryName: data?.data.forum.category_name,
+                    parentForumId: data?.data.forum.parent_forum_id,
+                    parentForumName: data?.data.forum.parent_forum_name,
+                  }}
+                  className={classes.newTopicLink}
+                >
+                  <Button
+                    variant="contained"
+                    sx={(theme) => ({ marginBottom: theme.spacing(2) })}
+                  >
+                    New topic
+                  </Button>
+                </Link>
               </Grid>
               <Grid item xs={12}>
                 {topicsData &&

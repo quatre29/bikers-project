@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import CustomPaper from "../CustomPaper";
 import { Link } from "react-router-dom";
-import { Grid, Typography, Divider } from "@mui/material";
+import { Grid, Typography, Divider, Button } from "@mui/material";
 import useStyles from "./styles";
 import ForumItemCard from "../ForumItemCard";
 import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
@@ -115,6 +115,12 @@ const ForumCategoryCard: React.FC<Props> = ({
               />
             ))}
         </Grid>
+        <Button
+          variant="contained"
+          sx={(theme) => ({ marginTop: theme.spacing(4) })}
+        >
+          New forum
+        </Button>
       </Grid>
     </CustomPaper>
   );

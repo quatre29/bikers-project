@@ -68,16 +68,20 @@ const ForumTopicPage: React.FC = () => {
 
   useEffect(() => {
     if (editorOpen) {
-      window.scrollTo({
-        top: editorRef.current?.offsetTop!,
-        left: 0,
-        behavior: "smooth",
-      });
+      scrollToEditor();
     }
   }, [editorOpen]);
 
+  const scrollToEditor = () => {
+    window.scrollTo({
+      top: editorRef.current?.offsetTop!,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   const openReplyEditor = () => {
-    setEditorOpen(true);
+    editorOpen ? scrollToEditor() : setEditorOpen(true);
   };
 
   const postNewReply = (data: string) => {

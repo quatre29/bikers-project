@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme: any) => ({
   divider: {
     // marginTop: theme.spacing(2),
   },
+  newTopicLink: {
+    textDecoration: "none",
+  },
 }));
 
 export default useStyles;

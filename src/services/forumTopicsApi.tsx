@@ -27,6 +27,18 @@ export const forumTopicsApi = createApi({
       providesTags: ["Topic"],
     }),
 
+    createNewTopic: builder.mutation<
+      ForumTopicResponse,
+      { body: { body: string; title: string }; forumId: string }
+    >({
+      query: ({ body, forumId }) => ({
+        url: `/api/forum/${forumId}/topics`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Topics"],
+    }),
+
     getTopicsByForumId: builder.query<ForumTopicsResponse, string>({
       query: (forum_id) => ({
         url: `/api/forum/${forum_id}/topics`,
@@ -81,4 +93,5 @@ export const {
   useAddNewReplyMutation,
   useEditReplyMutation,
   useDeleteReplyMutation,
+  useCreateNewTopicMutation,
 } = forumTopicsApi;
