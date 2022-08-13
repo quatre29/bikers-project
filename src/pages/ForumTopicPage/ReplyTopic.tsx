@@ -21,9 +21,11 @@ import {
   EditRounded,
 } from "@mui/icons-material";
 import TopicTextEditor from "./TopicTextEditor";
-import { edit } from "@cloudinary/url-gen/actions/animated";
+// import { edit } from "@cloudinary/url-gen/actions/animated";
+import { useNavigate, Link } from "react-router-dom";
 import {
   useDeleteReplyMutation,
+  useDeleteTopicByIdMutation,
   useEditReplyMutation,
 } from "../../services/forumTopicsApi";
 import { useAuth } from "../../hooks/useAuth";
@@ -59,6 +61,7 @@ const ReplyTopic: React.FC<Props> = ({
   const [deleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
   const editorRef = useRef<HTMLElement>(null);
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const [editReply, { isLoading, isSuccess, isError }] = useEditReplyMutation();
   const [
@@ -69,6 +72,15 @@ const ReplyTopic: React.FC<Props> = ({
       isError: isDeleteError,
     },
   ] = useDeleteReplyMutation();
+
+  const [
+    deleteTopic,
+    {
+      isLoading: isDeleteTopicLoading,
+      isSuccess: isDeleteTopicSuccess,
+      isError: isDeleteTopicError,
+    },
+  ] = useDeleteTopicByIdMutation();
 
   useEffect(() => {
     if (openEditor) {
@@ -88,6 +100,16 @@ const ReplyTopic: React.FC<Props> = ({
       toast("Something went wrong, please try again", { type: "error" });
     }
   }, [isDeleteSuccess, isDeleteError]);
+
+  useEffect(() => {
+    if (isDeleteTopicSuccess) {
+      toast("Topic successfully deleted", { type: "success" });
+      navigate(`/forum/${topicPost?.forum_id!}`);
+    }
+    if (isDeleteTopicError) {
+      toast("Something went wrong, please try again", { type: "error" });
+    }
+  }, [isDeleteTopicSuccess, isDeleteTopicError]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -119,8 +141,13 @@ const ReplyTopic: React.FC<Props> = ({
     setOpenEditor(false);
   };
 
-  const deleteReplyAction = () => {
-    deleteReply(replyPost?.reply_id!);
+  const deleteAction = () => {
+    if (topicPost) {
+      deleteTopic(topicPost.topic_id);
+    }
+    if (replyPost) {
+      deleteReply(replyPost?.reply_id!);
+    }
   };
 
   const handleOpenDeleteModal = () => {
@@ -201,14 +228,37 @@ const ReplyTopic: React.FC<Props> = ({
                   </MenuItem>
                 )}
 
-                {user?.user_id === author_id && (
-                  <MenuItem onClick={handleOpenEditor}>
-                    <ListItemIcon>
-                      <EditRounded />
-                    </ListItemIcon>
-                    Edit
-                  </MenuItem>
-                )}
+                {user?.user_id === author_id &&
+                  (topicPost ? (
+                    <Link
+                      to={`/forum/edit-topic`}
+                      state={{
+                        forumId: topicPost.forum_id,
+                        forumName: topicPost.forum_name,
+                        categoryId: topicPost.forum_category_id,
+                        categoryName: topicPost.forum_category,
+                        parentForumId: topicPost.forum_parent_id,
+                        parentForumName: topicPost.forum_parent_name,
+                        initialBody: topicPost.body,
+                        topicTitle: topicPost.title,
+                        topicId: topicPost.topic_id,
+                      }}
+                    >
+                      <MenuItem>
+                        <ListItemIcon>
+                          <EditRounded />
+                        </ListItemIcon>
+                        Edit
+                      </MenuItem>
+                    </Link>
+                  ) : (
+                    <MenuItem onClick={handleOpenEditor}>
+                      <ListItemIcon>
+                        <EditRounded />
+                      </ListItemIcon>
+                      Edit
+                    </MenuItem>
+                  ))}
                 <MenuItem onClick={handleCloseMenu}>
                   <ListItemIcon>
                     <FlagRounded />
@@ -248,8 +298,10 @@ const ReplyTopic: React.FC<Props> = ({
       </Box>
       <ModalConfirmation
         open={deleteConfirmationModal}
-        title="Are you sure you want to delete this reply?"
-        handleAgree={deleteReplyAction}
+        title={`Are you sure you want to delete this ${
+          topicPost ? "topic" : "reply"
+        }?`}
+        handleAgree={deleteAction}
         loading={isDeleteLoading}
         handleClose={() => setDeleteConfirmationModal(false)}
       />

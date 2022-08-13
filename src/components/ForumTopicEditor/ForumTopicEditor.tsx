@@ -5,7 +5,10 @@ import { Typography, Container, InputBase, Grid } from "@mui/material";
 import CustomPaper from "../CustomPaper";
 import { Link, useNavigate } from "react-router-dom";
 import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
-import { useCreateNewTopicMutation } from "../../services/forumTopicsApi";
+import {
+  useCreateNewTopicMutation,
+  useEditTopicMutation,
+} from "../../services/forumTopicsApi";
 import { toast } from "react-toastify";
 
 interface Props {
@@ -19,6 +22,8 @@ interface Props {
     categoryName: string;
     parentForumId: string;
     parentForumName: string;
+    topicId?: string;
+    topicTitle?: string;
   };
 }
 
@@ -38,6 +43,16 @@ const ForumTopicEditor: React.FC<Props> = ({
   const [createTopic, { isLoading, isSuccess, isError, data }] =
     useCreateNewTopicMutation();
 
+  const [
+    editTopic,
+    {
+      isLoading: isEditLoading,
+      isSuccess: isEditSuccess,
+      isError: isEditError,
+      data: editData,
+    },
+  ] = useEditTopicMutation();
+
   useEffect(() => {
     if (isSuccess && data) {
       toast("Successfully created a new topic", { type: "success" });
@@ -49,6 +64,17 @@ const ForumTopicEditor: React.FC<Props> = ({
     }
   }, [isSuccess, isError, data]);
 
+  useEffect(() => {
+    if (isEditSuccess && editData) {
+      toast("Successfully created a new topic", { type: "success" });
+      navigate(`/forum/topic/${editData.data.topic.topic_id}`);
+    }
+
+    if (isEditError) {
+      toast("Something went wrong, please try again", { type: "error" });
+    }
+  }, [isEditSuccess, isEditError, editData]);
+
   const onChange = (event: React.ChangeEvent) => {
     setCreateTopicState({
       ...createTopicState,
@@ -59,10 +85,19 @@ const ForumTopicEditor: React.FC<Props> = ({
   };
 
   const saveBodyData = (data: string) => {
-    createTopic({
-      body: { body: data, title: createTopicState.title },
-      forumId: state.forumId,
-    });
+    if (edit) {
+      editTopic({
+        topicId: state.topicId!,
+        body: { title: createTopicState.title, body: data },
+      });
+    }
+
+    if (!edit) {
+      createTopic({
+        body: { body: data, title: createTopicState.title },
+        forumId: state.forumId,
+      });
+    }
   };
 
   return (
@@ -122,6 +157,22 @@ const ForumTopicEditor: React.FC<Props> = ({
                 >
                   <Typography variant="body2" className={classes.forumText}>
                     {state.forumName}
+                  </Typography>
+                </Link>
+              </>
+            )}
+
+            {edit && (
+              <>
+                <Typography variant="body2" className={classes.linkSeparator}>
+                  {">"}
+                </Typography>
+                <Link
+                  to={`/forum/topic/${state.topicId}`}
+                  className={classes.textLink}
+                >
+                  <Typography variant="body2" className={classes.forumText}>
+                    {state.topicTitle}
                   </Typography>
                 </Link>
               </>

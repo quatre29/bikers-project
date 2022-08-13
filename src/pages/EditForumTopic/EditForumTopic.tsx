@@ -1,8 +1,6 @@
 import React from "react";
-import useStyles from "./styles";
-import { useLocation } from "react-router-dom";
 import ForumTopicEditor from "../../components/ForumTopicEditor";
-import { StringLiteralLike } from "typescript";
+import { useLocation } from "react-router-dom";
 
 interface PropsLocation {
   forumId: string;
@@ -11,14 +9,22 @@ interface PropsLocation {
   categoryName: string;
   parentForumId: string;
   parentForumName: string;
+  initialBody: string;
+  topicTitle: string;
+  topicId: string;
 }
 
-const CreateNewTopic: React.FC = () => {
+const EditForumTopic: React.FC = () => {
   const { state } = useLocation();
-  const classes = useStyles();
   const forumState: PropsLocation = state as PropsLocation;
-
-  return <ForumTopicEditor state={forumState} />;
+  return (
+    <ForumTopicEditor
+      state={forumState}
+      edit
+      title={forumState.topicTitle}
+      body={forumState.initialBody}
+    />
+  );
 };
 
-export default CreateNewTopic;
+export default EditForumTopic;

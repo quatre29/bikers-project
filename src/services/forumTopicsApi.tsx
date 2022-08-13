@@ -27,6 +27,14 @@ export const forumTopicsApi = createApi({
       providesTags: ["Topic"],
     }),
 
+    deleteTopicById: builder.mutation<void, string>({
+      query: (topic_id) => ({
+        url: `/api/forum/_/topics/${topic_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Topics"],
+    }),
+
     createNewTopic: builder.mutation<
       ForumTopicResponse,
       { body: { body: string; title: string }; forumId: string }
@@ -37,6 +45,18 @@ export const forumTopicsApi = createApi({
         body,
       }),
       invalidatesTags: ["Topics"],
+    }),
+
+    editTopic: builder.mutation<
+      ForumTopicResponse,
+      { topicId: string; body: { title: string; body: string } }
+    >({
+      query: ({ topicId, body }) => ({
+        url: `/api/forum/_/topics/${topicId}`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: ["Topic"],
     }),
 
     getTopicsByForumId: builder.query<ForumTopicsResponse, string>({
@@ -94,4 +114,6 @@ export const {
   useEditReplyMutation,
   useDeleteReplyMutation,
   useCreateNewTopicMutation,
+  useDeleteTopicByIdMutation,
+  useEditTopicMutation,
 } = forumTopicsApi;
