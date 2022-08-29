@@ -11,12 +11,12 @@ import {
   BlogBookmarksRes,
 } from "../models/response.model";
 import { BlogPostCreation, BlogPostUpdate } from "../models/state.model";
-import { BASE_API } from "../utils/api";
+import { BASE_URL } from "../utils/api";
 
 export const blogPostApi = createApi({
   reducerPath: "blogPostApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_API,
+    baseUrl: BASE_URL,
     prepareHeaders(headers) {
       return headers;
     },

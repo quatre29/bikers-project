@@ -5,12 +5,12 @@ import {
   UsersResponse,
 } from "../models/response.model";
 import { User } from "../models/user.model";
-import { BASE_API } from "../utils/api";
+import { BASE_URL } from "../utils/api";
 
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_API,
+    baseUrl: BASE_URL,
     prepareHeaders(headers) {
       return headers;
     },

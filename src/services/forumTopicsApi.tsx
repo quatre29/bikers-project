@@ -6,12 +6,12 @@ import {
   TopicRepliesResponse,
   TopicReplyResponse,
 } from "../models/forumTopics.model";
-import { BASE_API } from "../utils/api";
+import { BASE_URL } from "../utils/api";
 
 export const forumTopicsApi = createApi({
   reducerPath: "forumTopicsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_API,
+    baseUrl: BASE_URL,
     prepareHeaders(headers) {
       return headers;
     },
