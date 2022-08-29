@@ -6,11 +6,12 @@ import {
   BlogComment,
   BlogCommentRes,
 } from "../models/response.model";
+import { BASE_API } from "../utils/api";
 
 export const blogCommentsApi = createApi({
   reducerPath: "blogCommentsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:9090/",
+    baseUrl: BASE_API,
     prepareHeaders(headers) {
       return headers;
     },

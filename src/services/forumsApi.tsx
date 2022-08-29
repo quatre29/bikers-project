@@ -5,11 +5,12 @@ import {
   ForumResponse,
   ForumsByCategoryResponse,
 } from "../models/forumResponse.model";
+import { BASE_API } from "../utils/api";
 
 export const forumsApi = createApi({
   reducerPath: "forumsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:9090/",
+    baseUrl: BASE_API,
     prepareHeaders(headers) {
       return headers;
     },
