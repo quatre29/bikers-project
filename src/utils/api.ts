@@ -1,1 +1,2 @@
-export const BASE_URL = "http://localhost:9090";
+export const BASE_URL =
+  process.env.NODE_ENV === "development" ? "http://localhost:9090" : "";
