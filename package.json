@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ckeditor/ckeditor5-react": "^5.0.0",
     "@cloudinary/react": "^1.4.0",
     "@cloudinary/url-gen": "^1.8.0",
     "@emotion/react": "^11.8.1",
